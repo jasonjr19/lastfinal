@@ -71,13 +71,8 @@
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="{{ url_for('home') }}" class="navbar-brand p-0">
-                <!-- <h1 class="text-primary m-0"><i class="fa fa-angle-double-down -alt me-3" style="font-size:48px"></i>Travel Buddy</h1> -->
-                <p class="titlelogo">
-                    <span class="background">TRAVEL</span>
-                    <span class="titlelogo2">BUDDY</span>
-                </p>
-                
-                <!-- <img src="{{ url_for('static', filename='customer_assets/img/logogo.png') }}" class="custom-img-size" alt="Logo"> -->
+                <h1 class="text-primary m-0"><i class="fa fa-angle-double-down -alt me-3" style="font-size:48px"></i>Travel Buddy</h1>
+                <!-- <img src="img/logo.png" alt="Logo"> -->
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -102,7 +97,18 @@
                     </div> -->
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="{{ url_for('signup') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {% if session['logged_in'] != True %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {% elif session['logged_in'] == True and users %}
+                <div class="profile-info">
+                    <img src="{{ url_for('static', filename='images/g1new.jpg') }}" alt="Profile Picture">
+                    <div class="dropdown-content">
+                        <a href="">Profile</a>
+                        <!-- <p style="color: black;">{{ users[1] }}</p> -->
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </nav>
 
@@ -122,7 +128,7 @@
                             <button type="button" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
                         </div> -->
                     </div>
-                    <a href="{{ url_for('itinerary') }}" class="btn btn-primary rounded-pill py-2 px-4 position-relative mt-5 w-25" style="top: -50px;">Create your Itinerary</a>
+                    <a href="booking.html" class="btn btn-primary rounded-pill py-2 px-4 position-relative mt-5 w-25" style="top: -50px;">Create your Itinerary</a>
                      </div> 
                     </div>
                 </div>
@@ -144,8 +150,8 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
                     <h1 class="mb-4">Welcome to <span class="text-primary">Travel Buddy</span></h1>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                    <p class="mb-4">Welcome to Travel Buddy, your personalized travel companion! We're here to simplify your trip planning process and provide tailored guidance every step of the way, ensuring memorable and hassle-free adventures.</p>
+                    <p class="mb-4">Discover the world your way with Travel Buddy's customized itineraries. We listen to your desires and design personalized plans, ensuring your travels are as unique as you are.</p>
                     <div class="row gy-2 gx-4 mb-4">
                         <div class="col-sm-6">
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>First Class Flights</p>
@@ -157,10 +163,10 @@
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>5 Star Accommodations</p>
                         </div>
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Latest Model Vehicles</p>
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Rental Vehicles</p>
                         </div>
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>150 Premium City Tours</p>
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Self Generated Itinerary</p>
                         </div>
                         <div class="col-sm-6">
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>24/7 Service</p>
@@ -187,7 +193,7 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
                         <h5>Hotel Reservation</h5>
-                        <p>Book top hotels in Goa on our website.vdvdvdddsvsdsdsvsdvsdvsdvs</p>
+                        <p>Book top hotels in Goa on our website for a luxurious getaway amidst the serene beaches and vibrant culture of this coastal paradise.</p>
                     </div>
                 </div>
             </div>
@@ -196,7 +202,7 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-address-card text-primary mb-4"></i>
                         <h5>Documentation</h5>
-                        <p>Store your personal documents to make your adventure easy ddfdfdvdvdvvd.</p>
+                        <p>Store your personal documents securely to make your adventure easy and stress-free.</p>
                     </div>
                 </div>
             </div>
@@ -205,7 +211,7 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-plane text-primary mb-4"></i>
                         <h5>Transportation Services</h5>
-                        <p>Flight, train, etcvsvdsdvdvvdsdsvvdvsddvsvddsvsddsvdvs.</p>
+                        <p>Book flights, trains, buses, and more for your next journey with ease. Compare prices, schedules, and amenities hassle-free.</p>
                     </div>
                 </div>
             </div>
@@ -217,7 +223,7 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-automobile text-primary mb-4"></i>
                         <h5>Rental Services</h5>
-                        <p>Car rental services.</p>
+                        <p>Discover convenient car rental services for seamless travel experiences. Explore a range of vehicles and book with ease.</p>
                     </div>
                 </div>
             </div>
@@ -226,7 +232,7 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-magic text-primary mb-4"></i>
                         <h5>Custom Itinerary</h5>
-                        <p>Create a personalized itinerary.</p>
+                        <p>Explore Goa's pristine beaches and vibrant culture during a weekend getaway. Enjoy sun-soaked days, lively evenings, and unforgettable experiences.</p>
                     </div>
                 </div>
             </div>
@@ -235,7 +241,7 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-plus-square text-primary mb-4"></i>
                         <h5>Emergency Services</h5>
-                        <p>Emergency assistance during your travel.</p>
+                        <p>Stay connected and have peace of mind with 24/7 emergency assistance wherever you go. Our dedicated support team is just a call away to help you navigate any unexpected situations.</p>
                     </div>
                 </div>
             </div>
@@ -401,8 +407,9 @@
                     <div class="col-md-6 text-white">
                         <h6 class="text-white text-uppercase">Itinerary</h6>
                         <h1 class="text-white mb-4">Create your Itinerary</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <p class="mb-4">
+                            Create your itinerary for an unforgettable journey filled with adventure and discovery. Explore breathtaking landscapes, immerse yourself in local culture, and indulge in delicious cuisine along the way..</p>
+                        <p class="mb-4">Enriching travel experience, brimming with exploration and relaxation. Immerse yourself in diverse landscapes, savor local delights, and create lasting memories.</p>
                         <a class="btn btn-outline-light py-3 px-5 mt-2" href="">Read More</a>
                     </div>
                     <div class="col-md-6">
@@ -523,7 +530,7 @@
                         <h5 class="mt-4">Choose A Destination</h5>
                         <hr class="w-25 mx-auto bg-primary mb-1">
                         <hr class="w-50 mx-auto bg-primary mt-0">
-                        <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+                        <p class="mb-0">Select your destination and embark on a journey filled with exploration and wonder. Experience diverse cultures, breathtaking landscapes, and unforgettable adventures.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
@@ -534,7 +541,7 @@
                         <h5 class="mt-4">Pay Online</h5>
                         <hr class="w-25 mx-auto bg-primary mb-1">
                         <hr class="w-50 mx-auto bg-primary mt-0">
-                        <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+                        <p class="mb-0">Conveniently pay online for seamless transactions and hassle-free experiences.     Enjoy secure transactions and effortless payment processing for your peace of mind.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
@@ -545,7 +552,11 @@
                         <h5 class="mt-4">Fly Today</h5>
                         <hr class="w-25 mx-auto bg-primary mb-1">
                         <hr class="w-50 mx-auto bg-primary mt-0">
-                        <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+                        <p class="mb-0">Embark on an adventure today, explore new horizons, and create unforgettable memories. Pay online securely for peace of mind and seamless transactions.
+
+
+ccc                            .
+                        </p>
                     </div>
                 </div>
             </div>

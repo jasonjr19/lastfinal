@@ -18,20 +18,20 @@
   <div class="container">
     <div class="wrapper">
       <div class="title"><span>Login </span></div>
-      <form id="loginForm" action="#">
+      <form id="loginForm" action="{{ url_for('clogin') }}" method="post">
         <div class="row">
           <i class="fas fa-user"></i>
-          <input type="text" id="email" placeholder="Email or Phone" required>
+          <input type="text" id="email" name="email" placeholder="Email" required>
         </div>
         <div class="row">
           <i class="fas fa-lock"></i>
-          <input type="password" id="psw" placeholder="Password" required>
+          <input type="password" id="psw" name="psw" placeholder="Password" required>
         </div>
-        <div class="pass"><a href="{{ url_for('forgotpass') }}">Forgot password?</a></div>
+        <div class="pass"><a href="">Forgot password?</a></div>
         <div class="row button">
           <input type="submit" value="Login" onclick="return validateForm()">
         </div>
-        <div class="signup-link">Not a member? <a href="{{ url_for('signup') }}">Signup now</a></div>
+        <div class="signup-link">Not a member? <a href="{{ url_for('register') }}">Signup now</a></div>
       </form>
     </div>
   </div>

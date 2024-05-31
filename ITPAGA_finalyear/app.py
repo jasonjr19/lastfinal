@@ -58,22 +58,43 @@ def home():
     recommendations = cursor.fetchall()
     customer_exists = session.get('customer_exists')
     if customer_exists:
+        print("customer:")
         print(customer_exists)
-        return render_template('/Travelbuddycustomer/index.html', recommendations = recommendations)
+        return render_template('/Travelbuddycustomer/index.html',user=customer_exists, recommendations = recommendations)
     else: 
         return render_template('/Travelbuddycustomer/index.html', recommendations = recommendations)
+
+@app.route('/clogin', methods=['GET','POST'])
+def clogin():
+    username= request.form.get("email")
+    print(username)
+    customer_exists = session.get('customer_exists')
+    if customer_exists in session:
+        print("inside login customer exist zata")
+        return render_template("/Travelbuddycustomer/home.html", users=customer_exists, recommendations=existing_user1) #CHECK THIS FILE NAME LATERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+    else:
+        username= request.form.get("email")
+        password= request.form.get("psw")
+        print(password)
+        print(username)
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM customer WHERE email=%s and pass=%s; ''',[username,password])
+        customer_exists=cursor.fetchone()
+        cursor.execute('''SELECT * FROM `recommendations` WHERE rec_id LIMIT 3;''')
+        existing_user1=cursor.fetchall()
+        if not customer_exists:
+            return render_template("error.html",error="Incorrect Email Or Password")
+        session['logged_in'] = True
+        session['cust_data'] = customer_exists
+        session['cust_data'] = existing_user1
+
+        return render_template('/Travelbuddycustomer/index.html', users=customer_exists, recommendations=existing_user1)
+        # return redirect(url_for('home'))
+    return render_template('/Travelbuddycustomer/login.html')
 
 @app.route('/login')
 def login():
     return render_template('/Travelbuddycustomer/login.html')
-
-@app.route('/signup')
-def signup():
-    return render_template('/Travelbuddycustomer/signup.html')
-
-@app.route('/forgotpass')
-def forgotpass():
-    return render_template('/Travelbuddycustomer/forgotpass.html')
 
 @app.route('/about')
 def about():
@@ -83,15 +104,6 @@ def about():
 def service():
     return render_template('/Travelbuddycustomer/service.html')
 
-@app.route('/emergency')
-def emergency():
-    return render_template('/Travelbuddycustomer/emergency.html')
-
-@app.route('/docstore')
-def docstore():
-    return render_template('/Travelbuddycustomer/docstore.html')
-
-
 @app.route('/contact')
 def contact():
     return render_template('/Travelbuddycustomer/contact.html')
@@ -100,12 +112,43 @@ def contact():
 def itinerary():
     return render_template('/Travelbuddycustomer/booking.html')
 
+@app.route('/register')
+def register():
+    return render_template('/Travelbuddycustomer/signup.html')
+
+@app.route('/confirming', methods=['POST'])
+def confirming():
+    fname= request.form.get("firstName")
+    lname= request.form.get("lastName")
+    gender= request.form.get("gender")
+    email= request.form.get("email")
+    phone= request.form.get("phone")
+    password1=request.form.get("psw")
+    password2=request.form.get("confirmPsw")
+
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * FROM customer WHERE email=%s and pass=%s; ''',[email,password1])
+    existing_user=cursor.fetchone()
+    if existing_user:
+        print("alert galpa zai higa ok for now user exist zata zalear tege info insert zavpa na ok")
+    else:
+        cursor.execute('''INSERT INTO `customer` (`fname`, `lname`, `gender`, `email`, `phone`, `pass`, `cpass`) VALUES(%s,%s,%s,%s,%s,%s,%s)''',(fname,lname,gender,email,phone,password1,password2))
+        mysql.connection.commit()
+
+    return render_template('/Travelbuddycustomer/login.html')
+
 @app.route('/package')
 def package():
     cursor = mysql.connection.cursor()
     cursor.execute('''SELECT * FROM `recommendations` WHERE rec_id;''')
     recommendations = cursor.fetchall()
     return render_template('/Travelbuddycustomer/package.html', recommendations = recommendations)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
+
 # @app.route('/itinerarycreate')
 # def itinerarycreate():
 #     user_data = session.get('user_data')
