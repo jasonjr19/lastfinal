@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/gen.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Sample Form</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+          <div class="logo">Travel Buddy</div>
+          <div class="menu">
+            <a href="#hero">Home</a>
+            <!-- <a href="#destinations">Destinations</a> -->
+            <a href="#recommendations">Recommendations</a>
+            <a href="{{ url_for('itinerarycreate') }}">Create Itinerary</a>
+            <a href="#contact">Contact</a>
+            {% if session['logged_in'] != True %}
+            <a href="{{ url_for('signup') }}" class="sign-in-link">Sign Up</a> <!-- Hide this link when logged in -->
+            {% elif session['logged_in'] == True and users %}
+                      <div class="profile-info">
+                          <img src="{{ url_for('static', filename='images/g1new.jpg') }}" alt="Profile Picture">
+                          <div class="dropdown-content">
+                              <a href="{{ url_for('profile_edit') }}">Profile</a>
+                              <!-- <p style="color: black;">{{ users[1] }}</p> -->
+                              <a href="{{ url_for('logout') }}">Logout</a>
+                          </div>
+                      </div>
+            {% else %}
+                      <a href="{{ url_for('logout') }}">Admin/Vendor Logged In click Here To Log Out</a>
+            {% endif %}
+  
+          </div>
+        </nav>
+      </header>
+    <div class="heading">
+        <h2>YOUR GENERATED ITINERARY</h2>
+        <p class="gengen"></p>
+    </div>
+    <div class="container">
+        <div class="info">
+            <p><span class="bold">Start:</span> {{ org }}</p>
+        </div>
+        <div class="info">
+            <p><span class="bold">To:</span> {{ dest }}</p>
+            </div>
+            <div class="info">
+            <p><span class="bold">Starting Date:</span> {{ start }}</p>
+        </div>
+        <div class="info">
+            <p><span class="bold">Ending Date:</span> {{ end }}</p>
+        </div>
+        <div class="info">
+            <p><span class="bold">Duration:</span> {{ days }} Days</p>
+        </div>
+    </div>
+    <div class="start_end">
+        <p><span class="bold" class="design_text">Departure Airport:</span> {{ transportation[1][3] }} <br><br> <span class="bold" class="design_text">Arrival Airport:</span> {{ transportation[1][4] }}</p>
+    </div>
+    <div class="hotel_box">
+        <p class="design_text"><span class="bold">Hotel Name:</span> {{ hotel[1][1] }} <br>
+            <br> <span class="bold">Address:</span> {{ hotel[1][2] }} <br>
+            <br> <span class="bold">Rating:</span> {{ hotel[1][3] }} <br>
+            <br> <span class="bold">Description:</span> {{ hotel[1][4] }} <br>
+            <br> <span class="bold">Price/Night:</span> {{ hotel[1][5] }}</p>
+    </div>
+    <div class="hehehe">
+    <div class="hotel_box">
+        
+        <!-- <a class="edit_itinerary" href="{{ url_for('edit_itinerary') }}">Edit Itinerary</a> <br> -->
+        {% for creating_day in creating_days %}
+            {% if creating_day is string %}
+                <p class="bolding"> {{ creating_day }} </p>
+                <p class="subing"></p>
+        
+            <!-- <p>{{ creating_day }}</p> -->
+        
+            {% else: %}
+            <div class="each_activity">
+            {% for activity in creating_day: %}
+            <a class="edit_itinerary" href="{{ url_for('edit_itinerary') }}">Edit</a> <br>
+                <p><span class="navnav"> Name:</span> {{ activity[0] }} </p>
+                <p> <span class="navnav">Location:</span> {{ activity[1] }} </p>
+                <p> <span class="navnav">Description:</span> {{ activity[2] }} </p>
+                <p> <span class="navnav">Taluka:</span> {{ activity[3] }} </p>
+            <!-- print(f"Location: {activity[1]}")
+            print(f"Description: {activity[2]}")
+            print(f"Taluka: {activity[3]}") -->
+            <!-- <p class="design_text">{{ creating_day }} <br><br> </p> -->
+            {% endfor %}
+        </div>
+    
+            {% endif %}
+        
+        {% endfor %}
+    </div>
+    </div>
+    <!-- <div class="hotel_box">
+        {% for activity in creating_days%}
+        <p>Name: {{ activity[1] }}</p>
+        <p>Location: {{ activity[2] }}</p>
+        <p>Description: {{ activity[3] }}</p>
+        <p>Taluka: {{ activity[6] }}</p>
+        <br><br>
+        {% endfor %}
+    </div> -->
+    <div class="buttoncentering">
+        <!-- <button type="con_submit" class="iti_button">Confrimed Itinerary</button> -->
+        <p class="textsmalling"><a href="{{ url_for('con_submit') }}" class="iti_button">Confirm Itinerary</a></p>
+    </div>
+</body>
+</html>

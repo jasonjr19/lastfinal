@@ -1,0 +1,470 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #dbe5ff;
+  color: #333;
+}
+
+header {
+  background-color: #043263;
+  color: #fff;
+  padding: 1em 0;
+}
+
+/* Style navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+}
+
+/* Style logo */
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Style menu links */
+.menu a {
+  color: #dbe5ff;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+/* Style main section */
+main {
+  padding: 20px;
+}
+
+/* Add padding to footer to prevent it from being hidden behind fixed navbar */
+footer {
+padding-top: 60px; /* Adjust as needed based on navbar height */
+background-color: #043263;
+color: #fff;
+text-align: center;}
+
+/* Keep navbar fixed at the top */
+
+.logo {
+font-size: 2em;
+font-weight: bold;
+text-transform: uppercase;
+}
+
+/* Styling for menu links */
+.menu {
+margin-left: auto; /* Push menu links to the right */
+}
+
+.menu a {
+color: rgb(218, 218, 218);
+text-decoration: none;
+padding: 0 1em;
+transition: color 0.3s ease;
+}
+.menu a:hover {
+color: #fff; /* Change color on hover */
+}
+
+
+.menu a:hover {
+  color: rgb(86, 152, 217);
+}
+
+/* #hero {
+  background:linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('../images/image0_0.jpg') no-repeat center center;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+  font-size: large;
+  padding: 6em 0;
+  text-align: center;
+} */
+
+.btn-primary {
+  background-color: rgb(86, 152, 217);
+  color: white;
+  padding: 0.8em 1.5em;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.container {
+  padding: 2em 5%;
+}
+
+h2 {
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+  background-color: #f9f9f9;
+  padding: 2em;
+  border-radius: 5px;
+}
+
+input, select, textarea {
+  width: calc(100% - 16px); /* Adjusted width */
+  padding: 0.8em;
+  margin: 0.5em 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  background-color: rgb(86, 152, 217);
+  color: white;
+  padding: 0.8em 1.5em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: rgb(86, 152, 217);
+}
+
+
+/* Styling for form labels */
+#itinerary-form label {
+font-weight: bold;
+}
+
+/* Styling for form inputs */
+#itinerary-form input[type="text"],
+#itinerary-form input[type="date"],
+#itinerary-form select,
+#itinerary-form input[type="number"] {
+width: 100%;
+padding: 8px;
+margin: 5px 0;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+
+/* Styling for form select dropdown */
+#itinerary-form select {
+width: 100%;
+padding: 8px;
+margin: 5px 0;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+background-color: #f8f8f8;
+
+}
+
+/* Styling for form submit button */
+#itinerary-form button[type="submit"] {
+background-color: rgb(86, 152, 217);
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+/* Styling for form submit button on hover */
+#itinerary-form button[type="submit"]:hover {
+background-color: #555;
+}
+/* Styling for contact form labels */
+#contact-form label {
+font-weight: bold;
+display: block;
+margin-bottom: 5px;
+}
+
+/* Styling for contact form inputs */
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form textarea {
+width: 100%;
+padding: 10px;
+margin-bottom: 15px;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-sizing: border-box;
+}
+
+/* Styling for contact form submit button */
+#contact-form button[type="submit"] {
+background-color: rgb(86, 152, 217);
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+.custom-btn {
+background-color: rgb(86, 152, 217); /* Button background color */
+color: #fff; /* Text color */
+padding: 10px 20px; /* Padding */
+border-radius: 5px; /* Border radius */
+text-decoration: none; /* Remove underline */
+}
+
+.custom-btn:hover {
+background-color: rgb(86, 152, 217); /* Button background color on hover */
+}
+
+/* Styling for contact form submit button on hover */
+#contact-form button[type="submit"]:hover {
+background-color: #555;
+}
+
+/* Styling for contact form container */
+#contact {
+text-align: center;
+}
+
+/* Styling for contact form container */
+#contact .container {
+max-width: 600px;
+margin: 0 auto;
+}
+
+
+  .btn-primary {
+    padding: 1em 1em; 
+    
+  }
+
+
+
+#recommendations {
+  background-color: rgba(236, 236, 236, 0.403);
+  padding: 20px; /* Adjust padding as needed */
+}
+
+/* Styling for recommendation cards container */
+.recommendation-cards {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+
+/* Styling for recommendation card */
+.recommendation-card {
+position: relative;
+width: calc(33.33% - 20px); /* Adjust card width based on desired layout */
+margin-bottom: 20px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+border-radius: 8px;
+overflow: hidden;
+}
+
+/* Styling for recommendation card image */
+.recommendation-card img {
+width: 600px;
+height: 300px;
+border-radius: 8px; /* Rounded corners */
+transition: transform 0.3s ease; /* Animation on hover */
+}
+
+/* Styling for recommendation card content */
+.card-content {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+padding: 10px;
+transform: translateY(100%);
+transition: transform 0.3s ease; /* Animation on hover */
+}
+
+/* Styling for recommendation card title */
+.card-content h3 {
+margin: 0;
+color: #fff;
+}
+
+/* Styling for recommendation card description */
+.card-content p {
+margin: 5px 0;
+color: #fff;
+display: none; /* Hide description by default */
+}
+
+/* Styling for recommendation card book now button */
+.btn-book {
+display: block;
+margin: 0 auto; /* Center the button horizontally */
+padding: 5px 10px;
+background-color: rgb(86, 152, 217);
+color: #fff;
+border: none;
+border-radius: 5px;
+text-decoration: none;
+transition: background-color 0.3s ease; /* Animation on hover */
+}
+
+/* Styling for recommendation card book now button on hover */
+.btn-book:hover {
+background-color: #0056b3;
+}
+
+/* Styling for recommendation card on hover */
+.recommendation-card:hover img {
+transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.recommendation-card:hover .card-content {
+transform: translateY(0); /* Slide up effect on hover */
+}
+
+.recommendation-card:hover .card-content p {
+display: block; /* Show description on hover */
+}
+.custom-btn {
+background-color: #ffffff00; /* Button background color */
+color: #fff; /* Text color */
+padding: 10px 20px; /* Padding */
+border-radius: 5px; /* Border radius */
+text-decoration: none; /* Remove underline */
+}
+
+.custom-btn:hover {
+background-color: rgb(86, 152, 217);/* Button background color on hover */
+}
+
+/* #myVideo {
+position: fixed;
+right: 0;
+bottom: 0;
+min-width: 100%;
+min-height: 100%;
+} */
+
+.video-container {
+position: relative;
+width: 100%;
+height: 60vh; /* Adjust the height as needed */
+overflow: hidden;
+border-radius: 15px 15px 15px 15px;
+border: none;
+/* border-color: #f3f3f3; */
+}
+
+.video-container video {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover; /* Ensures the video covers the entire container */
+}
+
+.other-content{
+position: relative;
+/* margin-left: 15%; */
+color: rgb(255, 255, 255);
+font-size: medium;
+padding: 6em 0;
+text-align: center;
+padding-top: 120px;
+}
+
+.para_size{
+font-size: large;
+}
+
+.subtitle{
+width: 25%;
+/* height: 1px; */
+padding-top: 6px;
+background-color: #00AAF8;
+}
+
+
+.slide {
+  width: 100%;
+  height: 400px;
+}
+
+.container {
+  max-width: 8000px;
+  margin: 0 auto;
+}
+
+.icon-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: .3s;
+}
+
+.icon:hover{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 5px 3px 8px 5px lightgray;
+  background-color: white;
+}
+
+.icon i {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.material-symbols-outlined {
+  font-size: 14px;
+  text-align: center;
+}
+
+.booktitle{
+  text-align: center;
+}
+.see-more-link{
+  text-decoration: none;
+  float: right;
+  color: #333;
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  padding-top: 8px;
+  border-radius: 15px;
+  box-shadow: 5px 3px 8px 5px lightgray;
+}
+
+.colorchange{
+  color: #dbe5ff;
+}
+
+.bookingsep {
+  font-size: 14px; /* Adjust the font size of the text */
+  margin-top: 5px; /* Add space between the icon and text */
+}
+
+.bookingsep a {
+  text-decoration: none; /* Remove underline from the link */
+  color: #333; /* Set the text color */
+}
+
+.bookingsep a:hover {
+  color: #007bff; /* Change text color on hover */
+}
+
+.material-symbols-outlined {
+  font-weight: bold; /* Make the text bold */
+}
+
+.icon {
+  text-align: center; /* Center the content horizontally */
+}
+
