@@ -96,6 +96,27 @@ def clogin():
 def login():
     return render_template('/Travelbuddycustomer/login.html')
 
+@app.route('/hotel')
+def hotel():
+    return render_template('/Travelbuddycustomer/hotelbook.html')
+
+@app.route('/car')
+def car():
+    return render_template('/Travelbuddycustomer/car_rental.html')
+
+@app.route('/emergency')
+def emergency():
+    return render_template('/Travelbuddycustomer/emergency.html')
+
+@app.route('/docstore')
+def docstore():
+    return render_template('/Travelbuddycustomer/docstore.html')
+
+@app.route('/packbook')
+def packbook():
+    return render_template('/Travelbuddycustomer/package_booking.html')
+
+
 @app.route('/about')
 def about():
     return render_template('/Travelbuddycustomer/about.html')
@@ -143,6 +164,10 @@ def package():
     cursor.execute('''SELECT * FROM `recommendations` WHERE rec_id;''')
     recommendations = cursor.fetchall()
     return render_template('/Travelbuddycustomer/package.html', recommendations = recommendations)
+
+@app.route('/display')
+def display():
+    return render_template('/Travelbuddycustomer/display_itenary.html')
 
 @app.route('/logout')
 def logout():
