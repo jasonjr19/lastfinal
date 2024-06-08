@@ -122,7 +122,7 @@
 
 
   <!-- Service Start -->
-<div class="container-xxl py-5">
+  <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title bg-white text-center text-primary px-3">Services</h6>
@@ -130,65 +130,79 @@
         </div>
         <div class="row g-4">
             <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item rounded pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
-                        <h5>Hotel Reservation</h5>
-                        <p>Book top hotels in Goa on our website for a luxurious getaway amidst the serene beaches and vibrant culture of this coastal paradise.</p>
+                <a href="{{ url_for('hotel') }}" style="color: inherit; text-decoration: none;">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
+                            <h5>Hotel Reservation</h5>
+                            <p>Book top hotels in Goa on our website for a luxurious getaway amidst the serene beaches and vibrant culture of this coastal paradise.</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-address-card text-primary mb-4"></i>
-                        <h5>Documentation</h5>
-                        <p>Store your personal documents securely to make your adventure easy and stress-free.</p>
+                <a href="{{ url_for('docstore') }}" style="color: inherit; text-decoration: none;">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-address-card text-primary mb-4"></i>
+                            <h5>Documentation</h5>
+                            <p>Store your personal documents securely to make your adventure easy and stress-free.</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-plane text-primary mb-4"></i>
-                        <h5>Transportation Services</h5>
-                        <p>Book flights, trains, buses, and more for your next journey with ease. Compare prices, schedules, and amenities hassle-free.</p>
+                <a href="#" style="color: inherit; text-decoration: none;">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-plane text-primary mb-4"></i>
+                            <h5>Transportation Services</h5>
+                            <p>Book flights, trains, buses, and more for your next journey with ease. Compare prices, schedules, and amenities hassle-free.</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         <div class="mt-3">
-        <div class="row g-4">
-            <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item rounded pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-automobile text-primary mb-4"></i>
-                        <h5>Rental Services</h5>
-                        <p>Discover convenient car rental services for seamless travel experiences. Explore a range of vehicles and book with ease.</p>
-                    </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <a href="{{ url_for('car') }}" style="color: inherit; text-decoration: none;">
+                        <div class="service-item rounded pt-3">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-automobile text-primary mb-4"></i>
+                                <h5>Rental Services</h5>
+                                <p>Discover convenient car rental services for seamless travel experiences. Explore a range of vehicles and book with ease.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <a href="{{ url_for('itinerary') }}" style="color: inherit; text-decoration: none;">
+                        <div class="service-item rounded pt-3">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-magic text-primary mb-4"></i>
+                                <h5>Custom Itinerary</h5>
+                                <p>Explore Goa's pristine beaches and vibrant culture during a weekend getaway. Enjoy sun-soaked days, lively evenings, and unforgettable experiences.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <a href="{{ url_for('emergency') }}" style="color: inherit; text-decoration: none;">
+                        <div class="service-item rounded pt-3">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-plus-square text-primary mb-4"></i>
+                                <h5>Emergency Services</h5>
+                                <p>Stay connected and have peace of mind with 24/7 emergency assistance wherever you go. Our dedicated support team is just a call away to help you navigate any unexpected situations.</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-magic text-primary mb-4"></i>
-                        <h5>Custom Itinerary</h5>
-                        <p>Explore Goa's pristine beaches and vibrant culture during a weekend getaway. Enjoy sun-soaked days, lively evenings, and unforgettable experiences.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-plus-square text-primary mb-4"></i>
-                        <h5>Emergency Services</h5>
-                        <p>Stay connected and have peace of mind with 24/7 emergency assistance wherever you go. Our dedicated support team is just a call away to help you navigate any unexpected situations.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
     </div>
+</div>
+
 </div>
 <!-- Service End -->
 

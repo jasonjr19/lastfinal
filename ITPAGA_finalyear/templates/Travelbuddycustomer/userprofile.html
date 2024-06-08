@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>User Profile - Travel Buddy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='customer_assets/lib/animate/animate.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='customer_assets/lib/owlcarousel/assets/owl.carousel.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='customer_assets/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" type="text/css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='customer_assets/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='customer_assets/css/style.css') }}" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="{{ url_for('home') }}" class="navbar-brand p-0">
+                <h1 class="text-primary m-0"><i class="fa fa-angle-double-down me-3"></i>Travel Buddy</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
+                    <a href="{{ url_for('about') }}" class="nav-item nav-link">About</a>
+                    <a href="{{ url_for('service') }}" class="nav-item nav-link">Services</a>
+                    <a href="{{ url_for('package') }}" class="nav-item nav-link">Packages</a>
+                    <a href="{{ url_for('itinerary') }}" class="nav-item nav-link">Itinerary</a>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
+                </div>
+                <a href="{{ url_for('register') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Profile Header Start -->
+    <div class="container-fluid bg-primary py-5 mb-5 phero-header">
+        <div class="container py-5">
+            <div class="row justify-content-center py-5">
+                <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">User Profile</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Profile Header End -->
+
+    <!-- Profile Section Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="position-relative h-100">
+                    <img class="img-fluid rounded-circle w-100 h-100" src="{{ url_for('static', filename='customer_assets/img/user.jpg') }}" alt="" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.3s">
+                <h1 class="mb-4">John Smith</h1>
+                <p class="mb-4">Welcome to John Smith's profile. Here you can find all the necessary details about John, including his favorite travel destinations, recent activities, and personal preferences.</p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-envelope text-primary me-2"></i>johnsmith@example.com</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-phone-alt text-primary me-2"></i>+012 345 6789</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-birthday-cake text-primary me-2"></i>January 1, 1990</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-venus-mars text-primary me-2"></i>Male</p>
+                    </div>
+                </div>
+                <a class="btn btn-primary py-3 px-5 mt-2" href="#" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Profile Section End -->
+
+
+
+    <!-- User Activities Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">User Activities</h6>
+                <h1 class="mb-5">Recent Activities</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="activity-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="{{ url_for('static', filename='customer_assets/img/activity-1.jpg') }}" alt="">
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Trip to Paris</h5>
+                            <small>April 15, 2024</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="activity-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="{{ url_for('static', filename='customer_assets/img/activity-2.jpg') }}" alt="">
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Hiking in the Alps</h5>
+                            <small>March 10, 2024</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="activity-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="{{ url_for('static', filename='customer_assets/img/activity-3.jpg') }}" alt="">
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Beach Vacation</h5>
+                            <small>February 20, 2024</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- User Activities End -->
+
+    <!-- Edit Profile Modal Start -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ url_for('userprofile') }}" method="POST">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="userFirstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="userFirstName" name="firstName" value="John" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userLastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="userLastName" name="lastName" value="Doe" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userGender" class="form-label">Gender</label>
+                        <select class="form-select" id="userGender" name="gender" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="userName" name="username" value="johndoe" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="userEmail" name="email" value="johndoe@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userPhone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="userPhone" name="phone" value="+012 345 6789" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="userPassword" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Edit Profile Modal End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn  " data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Company</h4>
+                    <a class="btn btn-link" href="{{ url_for('about') }}">About Us</a>
+                    <a class="btn btn-link" href="{{ url_for('contact') }}">Contact Us</a>
+                    <!-- <a class="btn btn-link" href="">Privacy Policy</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">FAQs & Help</a> -->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <!-- <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p> -->
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 7744921799</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>finalyearproject690@gmail.com</p>
+                    <!-- <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div> -->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Gallery</h4>
+                    <div class="row g-2 pt-2">
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='customer_assets/img/package-1.jpg') }}" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='customer_assets/img/package-2.jpg') }}" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='customer_assets/img/package-3.jpg') }}" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='customer_assets/img/package-2.jpg') }}" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='customer_assets/img/package-3.jpg') }}" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="{{ url_for('static', filename='customer_assets/img/package-1.jpg') }}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Newsletter</h4>
+                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Travel Buddy</a>, All Right Reserved.
+
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        <!-- Designed By idwal <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> -->
+                    </div>
+                    <!-- <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Home</a>
+                            <a href="">Cookies</a>
+                            <a href="">Help</a>
+                            <a href="">FQAs</a>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+    <!-- Template Javascript  -->
+    <script src="{{ url_for('static', filename='customer_assets/js/main.js') }}"></script>
+</body>
+
+</html>

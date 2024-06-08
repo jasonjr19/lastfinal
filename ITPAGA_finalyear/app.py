@@ -121,6 +121,10 @@ def packbook():
 def about():
     return render_template('/Travelbuddycustomer/about.html')
 
+@app.route('/userprofile')
+def userprofile():
+    return render_template('/Travelbuddycustomer/userprofile.html')
+
 @app.route('/service')
 def service():
     return render_template('/Travelbuddycustomer/service.html')
