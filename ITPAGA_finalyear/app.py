@@ -104,6 +104,12 @@ def hotel():
 def car():
     return render_template('/Travelbuddycustomer/car_rental.html')
 
+@app.route('/payment')
+def payment():
+    return render_template('/Travelbuddycustomer/payment.html')
+
+
+
 @app.route('/emergency')
 def emergency():
     return render_template('/Travelbuddycustomer/emergency.html')
