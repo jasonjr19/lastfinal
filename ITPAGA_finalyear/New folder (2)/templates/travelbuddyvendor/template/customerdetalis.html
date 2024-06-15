@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Travel Buddy Vendor</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/favicon.png" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/jvectormap/jquery-jvectormap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/owl-carousel-2/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/owl-carousel-2/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/images/favicon.png') }}">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- start of sidebar -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>TRAVEL BUDDY</h3>
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">{{ users[1] }}</h5>
+                  <span>{{ users[3] }}</span>
+                </div>
+              </div>
+
+              <!-- Start of Vendor Profile Dropdown -->
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Profile info</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ url_for('logout') }}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Log Out</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <!-- End of Vendor Profile Dropdown -->
+
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          {% if users[3] == 'bus'%}
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+           <li class="nav-item menu-items">
+              <a class="nav-link" href="{{ url_for('busbooking') }}">
+                <span class="menu-icon">
+                  <i class="mdi mdi-laptop"></i>
+                </span>
+                <span class="menu-title">Bus Booking</span>
+              </a>
+           </li>
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <!-- Start of management sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Bus Management</span>
+            </a>
+          </li>
+          {% elif users[3] == 'flight'%}
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busbooking') }}">
+              <span class="menu-icon">
+                 <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Flight Bookings</span>
+            </a>
+          </li>
+              
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <!-- Start of management sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Flight Management</span>
+            </a>
+          </li>
+          {% elif users[3] == 'train'%}
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busbooking') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Train Bookings</span>
+            </a>
+          </li>
+               
+              
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <!-- Start of management sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+               <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Train Management</span>
+            </a>
+          </li>
+          {% elif users[3] == 'rental'%}
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busbooking') }}">
+              <span class="menu-icon">
+                 <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Rental  Bookings</span>
+            </a>
+          </li>
+              
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <!-- Start of management sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Rental  Management</span>
+            </a>
+          </li>
+          {% elif users[3] == 'hotel'%}
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busbooking') }}">
+              <span class="menu-icon">
+                 <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Room Bookings</span>
+            </a>
+          </li>
+              
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Room Management</span>
+            </a>
+          </li>
+           <!-- End of user pages sidebar -->
+           {% endif %}
+        </ul>
+      </nav>
+      <!-- partial -->
+      <!-- End of Sidebar -->
+
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <!-- <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a> -->
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <ul class="navbar-nav navbar-nav-right">
+
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ users[1] }}</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Profile info</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-onepassword  text-info"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item" href="{{ url_for('logout') }}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title"> Customer Details</h3>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Customer Entries</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">All user details are displayed</li>
+                  </ol>
+                </nav>
+              </div>
+  
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    </p>
+                    <div class="table-responsive">
+                      {% if users[3] == 'bus'%}
+                      <table class="table table-dark">
+                        <thead>
+                          <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Itinerary Id</th>
+                            <th>Travel Preference</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[7] }}</td>
+                            <td>{{ customer_detail[8] }}</td>
+                            <td>{{ customer_detail[9] }}</td>
+                            <td>{{ customer_detail[10] }}</td>
+                            <td>{{ customer_detail[11] }}</td>
+                             <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          {% elif users[3] == 'flight'%}
+                          <table class="table table-dark">
+                            <thead>
+                              <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Itinerary Id</th>
+                                <th>Travel Preference</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[13] }}</td>
+                            <td>{{ customer_detail[14] }}</td>
+                            <td>{{ customer_detail[15] }}</td>
+                            <td>{{ customer_detail[16] }}</td>
+                            <td>{{ customer_detail[17] }}</td>
+                             <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          {% elif users[3] == 'train'%}<table class="table table-dark">
+                            <thead>
+                              <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Itinerary Id</th>
+                                <th>Travel Preference</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[13] }}</td>
+                            <td>{{ customer_detail[14] }}</td>
+                            <td>{{ customer_detail[15] }}</td>
+                            <td>{{ customer_detail[16] }}</td>
+                            <td>{{ customer_detail[17] }}</td>
+                             <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          {% elif users[3] == 'rental'%}
+                          <table class="table table-dark">
+                            <thead>
+                              <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Itinerary Id</th>
+                                <th>Travel Preference</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[6] }}</td>
+                            <td>{{ customer_detail[7] }}</td>
+                            <td>{{ customer_detail[8] }}</td>
+                            <td>{{ customer_detail[9] }}</td>
+                            <td>{{ customer_detail[10] }}</td>
+                             <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          {% elif users[3] == 'hotel'%}
+                          <!-- Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel Hotel  -->
+                          <table class="table table-dark">
+                            <thead>
+                              <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Itinerary Id</th>
+                                <th>Travel Preference</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for customer_detail in customer_details %}
+                              <tr>
+                                <td>{{ customer_detail[12] }}</td> 
+                                <td>{{ customer_detail[13] }}</td>
+                                <td>{{ customer_detail[14] }}</td>
+                                <td>{{ customer_detail[15] }}</td>
+                                <td>{{ customer_detail[16] }}</td>
+                                <td>
+                                  <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                                </td>
+                              </tr>
+                          {% endfor %}
+                          {% endif %}
+                          <!-- <tr>
+                            <td>2</td>
+                            <td>Elgan Dsouza</td>
+                            <td>1234567890</td>
+                            <td>elgandsouza@email.com</td> -->
+                            <!-- <td>1</td> itinerary id -->
+                            <!-- <td>INDIA</td>travel preference -->
+                            <!-- <td>145</td>saved places -->
+                            <!-- <td>karnataka</td>past trips -->
+                            <!-- <td>IND5656783265</td>passport no -->
+                            <!-- <td>5678902345</td>emergency no -->
+                            <!-- <td>Private</td>travel history -->
+                            <!-- <td>hey there</td>comments -->
+                            <!-- <td>19:20</td>timestamp -->
+                            <!-- <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td> -->
+                          <!-- </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>Jackson D'silva</td>
+                            <td>6745986723</td>
+                            <td>jacksondsilva@email.com</td> -->
+                            <!-- <td>1</td> itinerary id -->
+                            <!-- <td>GOA</td>travel preference -->
+                            <!-- <td>145</td>saved places -->
+                            <!-- <td>Member</td>past trips -->
+                            <!-- <td>IND2345985672</td>passport no -->
+                            <!-- <td>1234565432</td>emergency no -->
+                            <!-- <td>Private</td>travel history -->
+                            <!-- <td>hey there</td>comments -->
+                            <!-- <td>16:20</td>timestamp -->
+                            <!-- <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>Vanzic Barretto</td>
+                            <td>3456781234</td>
+                            <td>vanzicbarretto@email.com</td> -->
+                            <!-- <td>4</td> itinerary id -->
+                            <!-- <td>India</td>travel preference -->
+                            <!-- <td>145</td>saved places -->
+                            <!-- <td>Member</td>past trips -->
+                            <!-- <td>IND2656735698</td>passport no -->
+                            <!-- <td>01456700002</td>emergency no -->
+                            <!-- <td>Private</td>travel history -->
+                            <!-- <td>hey there</td>comments -->
+                            <!-- <td>12:20</td>timestamp -->
+                            <!-- <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>Idwal Dias</td>
+                            <td>3476878756</td>
+                            <td>idwaldias@email.com</td> -->
+                            <!-- <td>1</td> itinerary id -->
+                            <!-- <td>INDIA</td>travel preference -->
+                            <!-- <td>145</td>saved places -->
+                            <!-- <td>Kerela</td>past trips -->
+                            <!-- <td>IND1456700002</td>passport no -->
+                            <!-- <td>1234565432</td>emergency no -->
+                            <!-- <td>Private</td>travel history -->
+                            <!-- <td>hey there</td>comments -->
+                            <!-- <td>7:50</td>timestamp -->
+                            <!-- <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>Rawdon Noronha</td>
+                            <td>2345678909</td>
+                            <td>rawdonnoronha@email.com</td> -->
+                            <!-- <td>6</td> itinerary id -->
+                            <!-- <td>South Korea</td>travel preference -->
+                            <!-- <td>145</td>saved places -->
+                            <!-- <td>Member</td>past trips -->
+                            <!-- <td>IND00045600012</td>passport no -->
+                            <!-- <td>1234565432</td>emergency no -->
+                            <!-- <td>Private</td>travel history -->
+                            <!-- <td>hey there</td>comments -->
+                            <!-- <td>2:20</td>timestamp  -->
+                            <!-- <td>
+                              <button type="button" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#showMoreModal1">Show More</button>
+                            </td>
+                          </tr> -->
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <!-- content-wrapper ends -->
+         
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/off-canvas.js"></script>
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/hoverable-collapse.js"></script>
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/misc.js"></script>
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/settings.js"></script>
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/js/dashboard.js"></script>
+
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/progressbar.js/progressbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/jvectormap/jquery-jvectormap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/owl-carousel-2/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/off-canvas.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/hoverable-collapse.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/misc.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/todolist.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/dashboard.js') }}"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>

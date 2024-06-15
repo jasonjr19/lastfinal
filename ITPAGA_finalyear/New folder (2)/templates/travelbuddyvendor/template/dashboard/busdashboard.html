@@ -1,0 +1,2432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Travel Buddy Vendor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/jvectormap/jquery-jvectormap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/owl-carousel-2/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/vendors/owl-carousel-2/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor_assets/images/favicon.png') }}">
+  </head>
+  <body>
+    {% if users[3] == 'bus' %}
+    <div class="container-scroller">
+      <!-- start of sidebar -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>TRAVEL BUDDY</h3>
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">{{ users[1] }}</h5>
+                  <span>{{ users[3] }}</span>
+                </div>
+              </div>
+
+              <!-- Start of Vendor Profile Dropdown -->
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Profile info</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ url_for('logout') }}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Log Out</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <!-- End of Vendor Profile Dropdown -->
+
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+           <li class="nav-item menu-items">
+              <a class="nav-link" href="{{ url_for('busbooking') }}">
+                <span class="menu-icon">
+                  <i class="mdi mdi-laptop"></i>
+                </span>
+                <span class="menu-title">Bus Booking</span>
+              </a>
+           </li>
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <!-- Start of management sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Bus Management</span>
+            </a>
+          </li>
+              
+          <!-- End of management sidebar -->
+         
+        
+          <!-- Start of pricing sidebar -->
+          <!-- <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('buspricing') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+              <span class="menu-title">Bus Pricing</span>
+            </a>
+          </li>       -->
+          <!-- End of pricing sidebar -->
+          
+          <!-- Start of user pages sidebar -->
+           <!-- End of user pages sidebar -->
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <!-- End of Sidebar -->
+
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <!-- <a class="navbar-brand brand-logo-mini" href="{{ url_for('busdashboard') }}"><img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/logo-mini.svg" alt="logo" /></a> -->
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ users[1] }}</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Profile info</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-onepassword  text-info"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item" href="{{ url_for('logout') }}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+          
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">        
+            <div class="row">
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Net Revenue</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          {% if not details: %}
+                          <h2 class="mb-0">Rs 0</h2>
+                          {% else %}
+                          <h2 class="mb-0">Rs {{ details[0][15] }}</h2>
+                          {% endif %}
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Poise kitu galla the sagotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Net Profits</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">Rs 0</h2>
+                         
+                        </div>
+                        <h6 class="text-muted font-weight-normal"> Poise kitu zale the sangotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Bookings</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">{{ count_details[0][0] }}</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">flight kitu book zalai the sagotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h1>chart zai bro</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+                   
+            
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">List of Bookings</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr></tr>
+                            <th> Name </th>
+                            <th> Booking Id </th>
+                            <th> Email</th>
+                            <th> Aadhar No </th>
+                            <th> Services </th>
+                            <th> Phone </th>
+                            <th> Status </th>
+                            <th> Status </th>
+                            <th> Status </th>
+                            <th> Status </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[7] }} {{ customer_detail[8] }}</td>
+                            <td>{{ customer_detail[9] }}</td>
+                            <td>{{ customer_detail[10] }}</td>
+                            <td>{{ customer_detail[11] }}</td>
+                            <td>{{ customer_detail[15] }}</td>
+                            <td>{{ customer_detail[17] }}</td>
+                            <td>{{ customer_detail[18] }}</td>
+                            <td>{{ customer_detail[19] }}</td>
+                            <td>{{ customer_detail[20] }}</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          <!-- <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face2.jpg" alt="image" />
+                              <span class="pl-2">Estella Bryan</span>
+                            </td>
+                            <td> 2 </td>
+                            <td> estellabryan@gmail.com </td>
+                            <td> 9856445678983562 </td>
+                            <td> Bus : Green bus <br> #GA 08 AK 5698 </td>
+                                 
+                            <td> 87534356272</td>
+                            <td>
+                              <div class="badge badge-outline-warning">Pending</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face5.jpg" alt="image" />
+                              <span class="pl-2">Lucy Abbott</span>
+                            </td>
+                            <td> 3</td>
+                            <td> lucyabbott@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Bus: Blue Bus  <br> #GA 09 AA 2678
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face3.jpg" alt="image" />
+                              <span class="pl-2">Peter Gill</span>
+                            </td>
+                            <td> 4 </td>
+                            <td> petergill@gmail.com </td>
+                            <td> 6475673746589734</td>
+                            <td> Bus : St Valankini Express <br> #GA 03 C 6671 </td> 
+                            <td> 9853645672</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face4.jpg" alt="image" />
+                              <span class="pl-2">Sallie Reyes</span>
+                            </td>
+                            <td> 5 </td>
+                            <td> sailliereyes@gmail.com</td>
+                            <td> 78647465367456737 </td>
+                            <td> Bus : Red Bus <br> #GA 06 AK 5489  </td>
+                            <td> 9843567787 </td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face19.jpg" alt="image" />
+                              <span class="pl-2">Mohsin Shaikh</span>
+                            </td>
+                            <td> 6</td>
+                            <td> mohsinshaikh@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Bus : Green Bus <br> # GA 09 D 8493
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr> -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Visitors by Countries</h4>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-us"></i>
+                                </td>
+                                <td>USA</td>
+                                <td class="text-right"> 1500 </td>
+                                <td class="text-right font-weight-medium"> 56.35% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-de"></i>
+                                </td>
+                                <td>Germany</td>
+                                <td class="text-right"> 800 </td>
+                                <td class="text-right font-weight-medium"> 33.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-au"></i>
+                                </td>
+                                <td>Australia</td>
+                                <td class="text-right"> 760 </td>
+                                <td class="text-right font-weight-medium"> 15.45% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-gb"></i>
+                                </td>
+                                <td>United Kingdom</td>
+                                <td class="text-right"> 450 </td>
+                                <td class="text-right font-weight-medium"> 25.00% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-ro"></i>
+                                </td>
+                                <td>Romania</td>
+                                <td class="text-right"> 620 </td>
+                                <td class="text-right font-weight-medium"> 10.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-br"></i>
+                                </td>
+                                <td>Brasil</td>
+                                <td class="text-right"> 230 </td>
+                                <td class="text-right font-weight-medium"> 75.00% </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-7">
+                        <div id="audience-map" class="vector-map"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+         
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+
+    {% elif users[3] == 'flight'  %}
+    <div class="container-scroller">
+      <!-- start of sidebar -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>TRAVEL BUDDY</h3>
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">{{ users[1] }}</h5>
+                  <span>{{ users[3] }}</span>
+                </div>
+              </div>
+
+              <!-- Start of Vendor Profile Dropdown -->
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Profile info</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ url_for('logout') }}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Log Out</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <!-- End of Vendor Profile Dropdown -->
+
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busbooking') }}">
+              <span class="menu-icon">
+                 <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Flight Bookings</span>
+            </a>
+          </li>
+              
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <!-- Start of management sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Flight Management</span>
+            </a>
+          </li>
+          <!-- End of management sidebar -->
+         
+           <!-- Start of schedule sidebar -->         
+           <!-- <li class="nav-item menu-items">
+            <a class="nav-link" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/schedules/flightschedule.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-calendar-clock"></i>
+              </span>
+              <span class="menu-title">Flight Schedule</span>
+            </a>
+          </li> -->
+                           
+                       
+           
+          <!-- End of Schedule sidebar -->
+
+          <!-- Start of pricing sidebar -->
+               
+                            
+                       
+                 <!-- <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('buspricing') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+              <span class="menu-title">Flight Pricing</span>
+            </a>
+          </li> -->
+          <!-- End of pricing sidebar -->
+          
+          <!-- Start of user pages sidebar -->
+
+          
+           <!-- End of user pages sidebar -->
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <!-- End of Sidebar -->
+
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <!-- <a class="navbar-brand brand-logo-mini" href="{{ url_for('busdashboard') }}"><img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/logo-mini.svg" alt="logo" /></a> -->
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ users[1] }}</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Profile info</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-onepassword  text-info"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item" href="{{ url_for('logout') }}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <!-- <p class="p-3 mb-0 text-center">Advanced settings</p> -->
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+                      
+                     
+                     
+                       
+                     
+            <div class="row">
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5> Net Revenue</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          {% if not details: %}
+                          <h2 class="mb-0">Rs 0</h2>
+                          {% else %}
+                          <h2 class="mb-0">Rs {{ details[0][22] }}</h2>
+                          {% endif %}
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Poise kitu galla the sagotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Net Profits</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">Rs 0</h2>
+                         
+                        </div>
+                        <h6 class="text-muted font-weight-normal"> Poise kitu zale the sangotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Bookings</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">{{ count_details[0][0] }}</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">flight kitu book zalai the sagotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h1>chart zai bro</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+                   
+            
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">List of Bookings</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr></tr>
+                            <th> Name </th>
+                            <th> Booking Id </th>
+                            <th> Email</th>
+                            <th> Aadhar No </th>
+                            <th> Services </th>
+                            <th> Phone </th>
+                            <th> Status </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[13] }} {{ customer_detail[14] }}</td>
+                            <td>{{ customer_detail[15] }}</td>
+                            <td>{{ customer_detail[16] }}</td>
+                            <td>{{ customer_detail[17] }}</td>
+                            <td>{{ customer_detail[21] }}</td>
+                            <td>{{ customer_detail[22] }}</td>
+                            <td>{{ customer_detail[24] }}</td>
+                            <td>{{ customer_detail[25] }}</td>
+                            <td>{{ customer_detail[26] }}</td>
+                            <td>{{ customer_detail[27] }}</td>
+                            <td>{{ customer_detail[9] }}</td>
+                            <!-- <td>{{ customer_detail[8] }}</td>
+                            <td>{{ customer_detail[5] }}</td>
+                            <td>{{ customer_detail[6] }}</td> -->
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          <!-- <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face2.jpg" alt="image" />
+                              <span class="pl-2">Estella Bryan</span>
+                            </td>
+                            <td> 2 </td>
+                            <td> estellabryan@gmail.com </td>
+                            <td> 9856445678983562 </td>
+                            <td> Flight : IndiGo  <br> #6E 194 </td>
+                                 
+                            <td> 87534356272</td>
+                            <td>
+                              <div class="badge badge-outline-warning">Pending</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face5.jpg" alt="image" />
+                              <span class="pl-2">Lucy Abbott</span>
+                            </td>
+                            <td> 3</td>
+                            <td> lucyabbott@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Flight: IndiGo  <br> #6E  633
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face3.jpg" alt="image" />
+                              <span class="pl-2">Peter Gill</span>
+                            </td>
+                            <td> 4 </td>
+                            <td> petergill@gmail.com </td>
+                            <td> 6475673746589734</td>
+                            <td> Flight : Vistara <br> #UK 583 </td> 
+                            <td> 9853645672</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face4.jpg" alt="image" />
+                              <span class="pl-2">Sallie Reyes</span>
+                            </td>
+                            <td> 5 </td>
+                            <td> sailliereyes@gmail.com</td>
+                            <td> 78647465367456737 </td>
+                            <td> Flight :SpiceJet <br> #SG  2909  </td>
+                            <td> 9843567787 </td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face19.jpg" alt="image" />
+                              <span class="pl-2">Mohsin Shaikh</span>
+                            </td>
+                            <td> 6</td>
+                            <td> mohsinshaikh@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Train: Air India <br>AI  9571
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr> -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Visitors by Countries</h4>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-us"></i>
+                                </td>
+                                <td>USA</td>
+                                <td class="text-right"> 1500 </td>
+                                <td class="text-right font-weight-medium"> 56.35% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-de"></i>
+                                </td>
+                                <td>Germany</td>
+                                <td class="text-right"> 800 </td>
+                                <td class="text-right font-weight-medium"> 33.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-au"></i>
+                                </td>
+                                <td>Australia</td>
+                                <td class="text-right"> 760 </td>
+                                <td class="text-right font-weight-medium"> 15.45% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-gb"></i>
+                                </td>
+                                <td>United Kingdom</td>
+                                <td class="text-right"> 450 </td>
+                                <td class="text-right font-weight-medium"> 25.00% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-ro"></i>
+                                </td>
+                                <td>Romania</td>
+                                <td class="text-right"> 620 </td>
+                                <td class="text-right font-weight-medium"> 10.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-br"></i>
+                                </td>
+                                <td>Brasil</td>
+                                <td class="text-right"> 230 </td>
+                                <td class="text-right font-weight-medium"> 75.00% </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-7">
+                        <div id="audience-map" class="vector-map"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+         
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    {% elif users[3] == 'hotel'  %}
+    <div class="container-scroller">
+      <!-- start of sidebar -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>TRAVEL BUDDY</h3>
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">{{ users[1] }}</h5>
+                  <span>{{ users[3] }}</span>
+                </div>
+              </div>
+
+              <!-- Start of Vendor Profile Dropdown -->
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Profile info</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ url_for('logout') }}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Log Out</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <!-- End of Vendor Profile Dropdown -->
+
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busbooking') }}">
+              <span class="menu-icon">
+                 <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Room Bookings</span>
+            </a>
+          </li>
+              
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Room Management</span>
+            </a>
+          </li>
+
+          <!-- Start of pricing sidebar -->       
+          <!-- <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('buspricing') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+              <span class="menu-title">Room Pricing</span>
+            </a>
+          </li> -->
+          <!-- End of pricing sidebar -->
+          
+          <!-- Start of user pages sidebar -->
+           <!-- End of user pages sidebar -->
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <!-- End of Sidebar -->
+
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <!-- <a class="navbar-brand brand-logo-mini" href="roomdashboard.html"><img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/logo-mini.svg" alt="logo" /></a> -->
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ users[1] }}</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Profile info</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-onepassword  text-info"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item" href="{{ url_for('logout') }}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <!-- <p class="p-3 mb-0 text-center">Advanced settings</p> -->
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+                      
+                     
+                     
+                       
+                     
+            <div class="row">
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5> Net Revenue</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          {% if not details: %}
+                          <h2 class="mb-0">Rs 0</h2>
+                          {% else %}
+                          <h2 class="mb-0">Rs {{ details[0][17] }}</h2>
+                          {% endif %}
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Poise kitu galla the sagotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Net Profits</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">Rs 0</h2>
+                         
+                        </div>
+                        <h6 class="text-muted font-weight-normal"> Poise kitu zale the sangotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Bookings</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">{{ count_details[0][0] }}</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">flight kitu book zalai the sagotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h1>chart zai bro</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+                   
+            
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">List of Bookings</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr></tr>
+                            <th> Name </th>
+                            <th> Booking Id </th>
+                            <th> Email</th>
+                            <th> Aadhar No </th>
+                            <th> Services </th>
+                            <th> Phone </th>
+                            <th> Status </th>
+                            <th> Status </th>
+                            <th> Status </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[12] }} {{ customer_detail[13] }}</td>
+                            <td>{{ customer_detail[14] }}</td>
+                            <td>{{ customer_detail[15] }}</td>
+                            <td>{{ customer_detail[16] }}</td>
+                            <td>{{ customer_detail[9] }}</td>
+                            <td>{{ customer_detail[8] }}</td>
+                            <td>{{ customer_detail[5] }}</td>
+                            <td>{{ customer_detail[6] }}</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          <!-- <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face2.jpg" alt="image" />
+                              <span class="pl-2">Estella Bryan</span>
+                            </td>
+                            <td> 2 </td>
+                            <td> estellabryan@gmail.com </td>
+                            <td> 9856445678983562 </td>
+                            <td> Room : Hotel 2  <br> #301 </td>
+                                 
+                            <td> 87534356272</td>
+                            <td>
+                              <div class="badge badge-outline-warning">Pending</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face5.jpg" alt="image" />
+                              <span class="pl-2">Lucy Abbott</span>
+                            </td>
+                            <td> 3</td>
+                            <td> lucyabbott@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Room : Hotel 3  <br> #401
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face3.jpg" alt="image" />
+                              <span class="pl-2">Peter Gill</span>
+                            </td>
+                            <td> 4 </td>
+                            <td> petergill@gmail.com </td>
+                            <td> 6475673746589734</td>
+                            <td> Room : Hotel 4 <br> #501 </td> 
+                            <td> 9853645672</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face4.jpg" alt="image" />
+                              <span class="pl-2">Sallie Reyes</span>
+                            </td>
+                            <td> 5 </td>
+                            <td> sailliereyes@gmail.com</td>
+                            <td> 78647465367456737 </td>
+                            <td> Room : Hotel 5 <br> #601  </td>
+                            <td> 9843567787 </td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face19.jpg" alt="image" />
+                              <span class="pl-2">Mohsin Shaikh</span>
+                            </td>
+                            <td> 6</td>
+                            <td> mohsinshaikh@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Room : Hotel 6 <br>#701
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr> -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Visitors by Countries</h4>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-us"></i>
+                                </td>
+                                <td>USA</td>
+                                <td class="text-right"> 1500 </td>
+                                <td class="text-right font-weight-medium"> 56.35% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-de"></i>
+                                </td>
+                                <td>Germany</td>
+                                <td class="text-right"> 800 </td>
+                                <td class="text-right font-weight-medium"> 33.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-au"></i>
+                                </td>
+                                <td>Australia</td>
+                                <td class="text-right"> 760 </td>
+                                <td class="text-right font-weight-medium"> 15.45% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-gb"></i>
+                                </td>
+                                <td>United Kingdom</td>
+                                <td class="text-right"> 450 </td>
+                                <td class="text-right font-weight-medium"> 25.00% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-ro"></i>
+                                </td>
+                                <td>Romania</td>
+                                <td class="text-right"> 620 </td>
+                                <td class="text-right font-weight-medium"> 10.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-br"></i>
+                                </td>
+                                <td>Brasil</td>
+                                <td class="text-right"> 230 </td>
+                                <td class="text-right font-weight-medium"> 75.00% </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-7">
+                        <div id="audience-map" class="vector-map"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+         
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    {% elif users[3] == 'rental'  %}
+    <div class="container-scroller">
+      <!-- start of sidebar -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>TRAVEL BUDDY</h3>
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">{{ users[1] }} </h5>
+                  <span>{{ users[3] }}</span>
+                </div>
+              </div>
+
+              <!-- Start of Vendor Profile Dropdown -->
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Profile info</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ url_for('logout') }}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Log Out</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <!-- End of Vendor Profile Dropdown -->
+
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busbooking') }}">
+              <span class="menu-icon">
+                 <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Rental  Bookings</span>
+            </a>
+          </li>
+              
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <!-- Start of management sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Rental  Management</span>
+            </a>
+          </li>
+          <!-- End of management sidebar -->
+         
+
+          <!-- Start of pricing sidebar -->      
+                 <!-- <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('buspricing') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+              <span class="menu-title">Rental Pricing</span>
+            </a>
+          </li> -->
+          <!-- End of pricing sidebar -->
+          
+          <!-- Start of user pages sidebar -->
+           <!-- End of user pages sidebar -->
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <!-- End of Sidebar -->
+
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <!-- <a class="navbar-brand brand-logo-mini" href="rentalvehicledashboard.html"><img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/logo-mini.svg" alt="logo" /></a> -->
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ users[1] }}</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Profile info</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-onepassword  text-info"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item" href="{{ url_for('logout') }}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <!-- <p class="p-3 mb-0 text-center">Advanced settings</p> -->
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+                      
+                     
+                     
+                       
+                     
+            <div class="row">
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5> Net Revenue</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">Rs {{ details[0][10] }}</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Poise kitu galla the sagotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Net Profits</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">Rs 0</h2>
+                         
+                        </div>
+                        <h6 class="text-muted font-weight-normal"> Poise kitu zale the sangotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Bookings</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">{{ count_details[0][0] }}</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">flight kitu book zalai the sagotha boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h1>chart zai bro</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+                   
+            
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">List of Bookings</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr></tr>
+                            <th> Name </th>
+                            <th> Booking Id </th>
+                            <th> Email</th>
+                            <th> Aadhar No </th>
+                            <th> Services </th>
+                            <th> Phone </th>
+                            <th> Status </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[6] }} {{ customer_detail[7] }}</td>
+                            <td>{{ customer_detail[8] }}</td>
+                            <td>{{ customer_detail[9] }}</td>
+                            <td>{{ customer_detail[10] }}</td>
+                            <td>{{ customer_detail[14] }}</td>
+                            <td>{{ customer_detail[18] }}</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          <!-- <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face2.jpg" alt="image" />
+                              <span class="pl-2">Estella Bryan</span>
+                            </td>
+                            <td> 2 </td>
+                            <td> estellabryan@gmail.com </td>
+                            <td> 9856445678983562 </td>
+                            <td> Rental : I 20  <br> #GA 04 F 3444 </td>
+                                 
+                            <td> 87534356272</td>
+                            <td>
+                              <div class="badge badge-outline-warning">Pending</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face5.jpg" alt="image" />
+                              <span class="pl-2">Lucy Abbott</span>
+                            </td>
+                            <td> 3</td>
+                            <td> lucyabbott@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Rental : Fascino  <br> #GA 05 F 2193
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face3.jpg" alt="image" />
+                              <span class="pl-2">Peter Gill</span>
+                            </td>
+                            <td> 4 </td>
+                            <td> petergill@gmail.com </td>
+                            <td> 6475673746589734</td>
+                            <td> Rental :  Activa 5G
+                              <br> #GA 08 AR 3309 </td> 
+                            <td> 9853645672</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face4.jpg" alt="image" />
+                              <span class="pl-2">Sallie Reyes</span>
+                            </td>
+                            <td> 5 </td>
+                            <td> sailliereyes@gmail.com</td>
+                            <td> 78647465367456737 </td>
+                            <td> Rental : Swift <br> #GA 08 AA 1886</td>
+                            <td> 9843567787 </td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face19.jpg" alt="image" />
+                              <span class="pl-2">Mohsin Shaikh</span>
+                            </td>
+                            <td> 6</td>
+                            <td> mohsinshaikh@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Rental: Alto <br>#GA 09 AB 2060
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr> -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Visitors by Countries</h4>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-us"></i>
+                                </td>
+                                <td>USA</td>
+                                <td class="text-right"> 1500 </td>
+                                <td class="text-right font-weight-medium"> 56.35% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-de"></i>
+                                </td>
+                                <td>Germany</td>
+                                <td class="text-right"> 800 </td>
+                                <td class="text-right font-weight-medium"> 33.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-au"></i>
+                                </td>
+                                <td>Australia</td>
+                                <td class="text-right"> 760 </td>
+                                <td class="text-right font-weight-medium"> 15.45% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-gb"></i>
+                                </td>
+                                <td>United Kingdom</td>
+                                <td class="text-right"> 450 </td>
+                                <td class="text-right font-weight-medium"> 25.00% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-ro"></i>
+                                </td>
+                                <td>Romania</td>
+                                <td class="text-right"> 620 </td>
+                                <td class="text-right font-weight-medium"> 10.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-br"></i>
+                                </td>
+                                <td>Brasil</td>
+                                <td class="text-right"> 230 </td>
+                                <td class="text-right font-weight-medium"> 75.00% </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-7">
+                        <div id="audience-map" class="vector-map"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+         
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    {% elif users[3] == 'train'  %}
+    <div class="container-scroller">
+      <!-- start of sidebar -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>TRAVEL BUDDY</h3>
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">{{ users[1] }}</h5>
+                  <span>{{ users[3] }}</span>
+                </div>
+              </div>
+
+              <!-- Start of Vendor Profile Dropdown -->
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Profile info</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ url_for('logout') }}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Log Out</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <!-- End of Vendor Profile Dropdown -->
+
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+
+          <!-- Start of Dashboard Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busdashboard') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <!-- End  of Dashboard Sidebar -->
+
+          <!-- Start of Bookings Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busbooking') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Train Bookings</span>
+            </a>
+          </li>
+               
+              
+          <!-- End of Bookings Sidebar -->
+
+          <!-- Start of Customer Sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('customerdetalis') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-box-outline"></i>
+              </span>
+              <span class="menu-title">Customer Details</span>
+            </a>
+          </li>
+          <!-- End of Customer Sidebar -->
+
+          <!-- Start of management sidebar -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('busmanagement') }}">
+              <span class="menu-icon">
+               <i class="mdi mdi-settings-box"></i>
+              </span>
+              <span class="menu-title">Train Management</span>
+            </a>
+          </li>
+              
+              
+          <!-- End of management sidebar -->
+         
+           <!-- Start of schedule sidebar -->                        
+             <!-- <li class="nav-item menu-items">
+            <a class="nav-link" href="/corona-free-dark-bootstrap-admin-template-1.0.0/template/schedules/trainschedule.html">
+              <span class="menu-icon">
+               <i class="mdi mdi-calendar-clock"></i>
+              </span>
+              <span class="menu-title">Train Schedule</span>
+            </a>
+          </li> -->
+           
+          <!-- End of Schedule sidebar -->
+
+          <!-- Start of pricing sidebar -->
+          <!-- <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url_for('buspricing') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+              <span class="menu-title">Train Pricing</span>
+            </a>
+          </li> -->
+                           
+                        
+          <!-- End of pricing sidebar -->
+          
+          <!-- Start of user pages sidebar -->
+           <!-- End of user pages sidebar -->
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <!-- End of Sidebar -->
+
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <!-- <a class="navbar-brand brand-logo-mini" href="traindashboard.html"><img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/logo-mini.svg" alt="logo" /></a> -->
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ users[1] }}</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Profile info</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-onepassword  text-info"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item" href="{{ url_for('logout') }}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <!-- <p class="p-3 mb-0 text-center">Advanced settings</p> -->
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+                      
+                     
+                     
+                       
+                     
+            <div class="row">
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Net Revenue</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          {% if not details: %}
+                          <h2 class="mb-0">Rs 0</h2>
+                          {% else %}
+                          <h2 class="mb-0">Rs {{ details[0][22] }}</h2>
+                          {% endif %}
+                          
+                        </div>
+                        <h6 class="text-muted font-weight-normal">poise nai re boi</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Sales</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">RS 0</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal"> Rindan aha re</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Bookings</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">{{ count_details[0][0] }}</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Rav MAshe</h6>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h1>chart zai bro</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+                   
+            
+
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">List of Bookings</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr></tr>
+                            <th> Name </th>
+                            <th> Booking Id </th>
+                            <th> Email</th>
+                            <th> Aadhar No </th>
+                            <th> Services </th>
+                            <th> Phone </th>
+                            <th> Status </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for customer_detail in customer_details %}
+                          <tr>
+                            <td>{{ customer_detail[13] }} {{ customer_detail[14] }}</td>
+                            <td>{{ customer_detail[15] }}</td>
+                            <td>{{ customer_detail[16] }}</td>
+                            <td>{{ customer_detail[17] }}</td>
+                            <td>{{ customer_detail[22] }}</td>
+                            <td>{{ customer_detail[24] }}</td>
+                            <td>{{ customer_detail[25] }}</td>
+                            <td>{{ customer_detail[26] }}</td>
+                            <td>{{ customer_detail[27] }}</td>
+                            <td>{{ customer_detail[30] }}</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          <!-- <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face2.jpg" alt="image" />
+                              <span class="pl-2">Estella Bryan</span>
+                            </td>
+                            <td> 2 </td>
+                            <td> estellabryan@gmail.com </td>
+                            <td> 9856445678983562 </td>
+                            <td> Train : Nzm Ers Duronto<br>
+                                #12284</td>
+                            <td> 87534356272</td>
+                            <td>
+                              <div class="badge badge-outline-warning">Pending</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face5.jpg" alt="image" />
+                              <span class="pl-2">Lucy Abbott</span>
+                            </td>
+                            <td> 3</td>
+                            <td> lucyabbott@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td> Train: MAO TEJAS EXP <br>#22119 
+                                </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face3.jpg" alt="image" />
+                              <span class="pl-2">Peter Gill</span>
+                            </td>
+                            <td> 4 </td>
+                            <td> petergill@gmail.com </td>
+                            <td> 6475673746589734</td>
+                            <td> Train : Kcg Ynk Exp<br>
+                                #17603 </td>
+                            <td> 9853645672</td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face4.jpg" alt="image" />
+                              <span class="pl-2">Sallie Reyes</span>
+                            </td>
+                            <td> 5 </td>
+                            <td> sailliereyes@gmail.com</td>
+                            <td> 78647465367456737 </td>
+                            <td> Train :TEN HUMSAFAR <br>
+                                #19424 
+                                 </td>
+                            <td> 9843567787 </td>
+                            <td>
+                              <div class="badge badge-outline-success">Approved</div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <img src="/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face19.jpg" alt="image" />
+                              <span class="pl-2">Mohsin Shaikh</span>
+                            </td>
+                            <td> 6</td>
+                            <td> mohsinshaikh@gmail.com </td>
+                            <td> 7645367829835647</td>
+                            <td>Train : Rani Chennamma<br>
+                                #16589 
+                               </td>
+                            <td> 8743567625</td>
+                            <td>
+                              <div class="badge badge-outline-danger">Rejected</div>
+                            </td>
+                          </tr> -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Visitors by Countries</h4>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-us"></i>
+                                </td>
+                                <td>USA</td>
+                                <td class="text-right"> 1500 </td>
+                                <td class="text-right font-weight-medium"> 56.35% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-de"></i>
+                                </td>
+                                <td>Germany</td>
+                                <td class="text-right"> 800 </td>
+                                <td class="text-right font-weight-medium"> 33.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-au"></i>
+                                </td>
+                                <td>Australia</td>
+                                <td class="text-right"> 760 </td>
+                                <td class="text-right font-weight-medium"> 15.45% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-gb"></i>
+                                </td>
+                                <td>United Kingdom</td>
+                                <td class="text-right"> 450 </td>
+                                <td class="text-right font-weight-medium"> 25.00% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-ro"></i>
+                                </td>
+                                <td>Romania</td>
+                                <td class="text-right"> 620 </td>
+                                <td class="text-right font-weight-medium"> 10.25% </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <i class="flag-icon flag-icon-br"></i>
+                                </td>
+                                <td>Brasil</td>
+                                <td class="text-right"> 230 </td>
+                                <td class="text-right font-weight-medium"> 75.00% </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-7">
+                        <div id="audience-map" class="vector-map"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+         
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    {% endif %}
+    
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/progressbar.js/progressbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/jvectormap/jquery-jvectormap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/vendors/owl-carousel-2/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/off-canvas.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/hoverable-collapse.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/misc.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/todolist.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor_assets/js/dashboard.js') }}"></script>
+  </body>
+</html>
