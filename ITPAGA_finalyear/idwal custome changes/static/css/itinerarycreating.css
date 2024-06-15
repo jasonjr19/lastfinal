@@ -1,0 +1,28 @@
+.heading{
+    margin-left: 25px;
+}
+
+.marginaddzaina{
+    margin-left: 25px;
+}
+
+.dropdowntitle{
+    padding: 15px;
+    border-radius: 10px;
+    /* border-color: black; */
+    box-shadow: 2px 1px 4px 2px lightgray;
+}
+
+.iti_submit{
+    width: 50%;
+    margin-left: 25%;
+    font-size: medium;
+    border-radius: 15px;
+    box-shadow: 2px 1px 4px 2px lightgray;
+    transition: .3s;
+}
+
+.iti_submit:hover{
+    background-color: #00AAF8;
+    box-shadow: 5px 3px 8px 5px lightgray;
+}

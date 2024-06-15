@@ -97,7 +97,17 @@
                     </div> -->
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {% if session['logged_in'] != True %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {% elif session['logged_in'] == True and user %}
+                <div class="navbar-profile">
+                    <img class="img-xs rounded-circle w-50 h-50" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="Profile Picture">
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </nav>
 
@@ -119,129 +129,128 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid"> <!-- Added a fluid container for full-width -->
-        <div class="row justify-content-center"> <!-- Centering the container horizontally -->
-            <div class="col-lg-10 col-lg-5"> <!-- Adjust column width based on your design -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container text-center"> <!-- Added text-center class here -->
-            <div class="booking p-5 mx-auto"> <!-- Added mx-auto to center align the content -->
-                <div class="row g-4 align-items-center">
-                    <div class="col-md-6 text-white">
-                        <h6 class="text-white text-uppercase">Itinerary</h6>
-                        <h1 class="text-white mb-4">Create your Itinerary</h1>
-                        <p class="mb-4">
-                            Create your itinerary for an unforgettable journey filled with adventure and discovery. Explore breathtaking landscapes, immerse yourself in local culture, and indulge in delicious cuisine along the way.
-                        </p>
-                        <p class="mb-4">Enriching travel experience, brimming with exploration and relaxation. Immerse yourself in diverse landscapes, savor local delights, and create lasting memories.</p>
-                        
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-transparent" id="travel_type" name="travel_type" required>
-                                            <option value="" disabled selected>Select</option>
-                                            <option value="Solo">Solo</option>
-                                            <option value="Couple">Couple</option>
-                                            <option value="Family">Family</option>
-                                            <option value="Group">Group</option>
-                                        </select>
-                                        <label for="travel_type">Travel Type</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-transparent" id="trip_type" name="trip_type" required>
-                                            <option value="" disabled selected>Select</option>
-                                            <option value="Chill (1-2 activities)">Chill (1-2 activities)</option>
-                                            <option value="Touristy (2-3 activities)">Touristy (2-3 activities)</option>
-                                            <option value="Packed (3 or more activities)">Packed (3 or more activities)</option>
-                                        </select>
-                                        <label for="trip_type">Trip Type</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="date" class="form-control bg-transparent" id="arrival_date" name="arrival_date" required>
-                                        <label for="arrival_date">Start Date</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="date" class="form-control bg-transparent" id="departure_date" name="departure_date" required>
-                                        <label for="departure_date">End Date</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-transparent" id="source" name="source" required>
-                                            <option value="" disabled selected>Select Source</option>
-                                            <option value="City A">City A</option>
-                                            <option value="City B">City B</option>
-                                            <option value="City C">City C</option>
-                                            <!-- Add more cities as needed -->
-                                        </select>
-                                        <label for="source">Source</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-transparent" id="destination" name="destination" required>
-                                            <option value="" disabled selected>Select Destination</option>
-                                            <option value="City X">City X</option>
-                                            <option value="City Y">City Y</option>
-                                            <option value="City Z">City Z</option>
-                                            <!-- Add more cities as needed -->
-                                        </select>
-                                        <label for="destination">Destination</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control bg-transparent" id="adults" name="adults" required min="1">
-                                        <label for="adults">Number of Adults</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control bg-transparent" id="children" name="children" required min="0">
-                                        <label for="children">Number of Children</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-transparent" id="ageGroup" name="ageGroup" required>
-                                            <option value="" disabled selected>Select Age Group</option>
-                                            <option value="0-17">0 - 17</option>
-                                            <option value="18-24">18 to 24</option>
-                                            <option value="25-34">25 to 34</option>
-                                            <option value="35-44">35 to 44</option>
-                                            <option value="45-54">45 to 54</option>
-                                            <option value="55-64">55 to 64</option>
-                                            <option value="65 or older">65 And Above</option>
-                                        </select>
-                                        <label for="ageGroup">Age Group</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-transparent" id="budget" name="budget" required>
-                                            <option value="" disabled selected>Select Budget</option>
-                                            <option value="10000">Less than 10000</option>
-                                            <option value="20000">10000 - 20000</option>
-                                            <option value="40000">20000 - 40000</option>
-                                            <option value="60000">40000 - 60000</option>
-                                            <option value="80000">60000 - 80000</option>
-                                            <option value="100000">80000 - 100000</option>
-                                            <option value="100000000">More than ₹100,000</option>
-                                        </select>
-                                        <label for="budget">Budget (in Rs)</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary py-3 px-5" type="submit">Submit</button>
+    
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="booking p-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-md-6 text-white">
+                    <h6 class="text-white text-uppercase">Itinerary</h6>
+                    <h1 class="text-white mb-4">Create your Itinerary</h1>
+                    <p class="mb-4">
+                        Create your itinerary for an unforgettable journey filled with adventure and discovery. Explore breathtaking landscapes, immerse yourself in local culture, and indulge in delicious cuisine along the way.
+                    </p>
+                    <p class="mb-4">Enriching travel experience, brimming with exploration and relaxation. Immerse yourself in diverse landscapes, savor local delights, and create lasting memories.</p>
+                    
+                    <a class="btn btn-outline-light py-3 px-5 mt-2" href="{{ url_for('display') }}">submit</a>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="text-white mb-4">Book A Tour</h1>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select bg-transparent" id="travel_type" name="travel_type" required>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="Solo">Solo</option>
+                                        <option value="Couple">Couple</option>
+                                        <option value="Family">Family</option>
+                                        <option value="Group">Group</option>
+                                    </select>
+                                    <label for="travel_type">Travel Type</label>
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select bg-transparent" id="trip_type" name="trip_type" required>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="Chill (1-2 activities)">Chill (1-2 activities)</option>
+                                        <option value="Touristy (2-3 activities)">Touristy (2-3 activities)</option>
+                                        <option value="Packed (3 or more activities)">Packed (3 or more activities)</option>
+                                    </select>
+                                    <label for="trip_type">Trip Type</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control bg-transparent" id="arrival_date" name="arrival_date" required>
+                                    <label for="arrival_date">Start Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control bg-transparent" id="departure_date" name="departure_date" required>
+                                    <label for="departure_date">End Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select bg-transparent" id="source" name="source" required>
+                                        <option value="" disabled selected>Select Source</option>
+                                        <option value="City A">City A</option>
+                                        <option value="City B">City B</option>
+                                        <option value="City C">City C</option>
+                                        <!-- Add more cities as needed -->
+                                    </select>
+                                    <label for="source">Source</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select bg-transparent" id="destination" name="destination" required>
+                                        <option value="" disabled selected>Select Destination</option>
+                                        <option value="City X">City X</option>
+                                        <option value="City Y">City Y</option>
+                                        <option value="City Z">City Z</option>
+                                        <!-- Add more cities as needed -->
+                                    </select>
+                                    <label for="destination">Destination</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control bg-transparent" id="adults" name="adults" required min="1">
+                                    <label for="adults">Number of Adults</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control bg-transparent" id="children" name="children" required min="0">
+                                    <label for="children">Number of Children</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select bg-transparent" id="ageGroup" name="ageGroup" required>
+                                        <option value="" disabled selected>Select Age Group</option>
+                                        <option value="0-17">0 - 17</option>
+                                        <option value="18-24">18 to 24</option>
+                                        <option value="25-34">25 to 34</option>
+                                        <option value="35-44">35 to 44</option>
+                                        <option value="45-54">45 to 54</option>
+                                        <option value="55-64">55 to 64</option>
+                                        <option value="65 or older">65 And Above</option>
+                                    </select>
+                                    <label for="ageGroup">Age Group</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select bg-transparent" id="budget" name="budget" required>
+                                        <option value="" disabled selected>Select Budget</option>
+                                        <option value="10000">Less than 10000</option>
+                                        <option value="20000">10000 - 20000</option>
+                                        <option value="40000">20000 - 40000</option>
+                                        <option value="60000">40000 - 60000</option>
+                                        <option value="80000">60000 - 80000</option>
+                                        <option value="100000">80000 - 100000</option>
+                                        <option value="100000000">More than ₹100,000</option>
+                                    </select>
+                                    <label for="budget">Budget (in Rs)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <script>
                         // Get the current date
                         var currentDate = new Date().toISOString().split('T')[0];

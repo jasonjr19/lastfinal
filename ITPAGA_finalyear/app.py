@@ -56,11 +56,14 @@ def home():
     cursor = mysql.connection.cursor()
     cursor.execute('''SELECT * FROM `recommendations` WHERE rec_id LIMIT 3;''')
     recommendations = cursor.fetchall()
+    cursor.execute('''SELECT `depart_airport` FROM `flights`;''')
+    depart_details=[row[0] for row in cursor.fetchall()]
+    print(depart_details)
     customer_exists = session.get('customer_exists')
     if customer_exists:
         print("customer:")
         print(customer_exists)
-        return render_template('/Travelbuddycustomer/index.html',user=customer_exists, recommendations = recommendations)
+        return render_template('/Travelbuddycustomer/index.html',user=customer_exists, recommendations = recommendations,depart_details=depart_details)
     else: 
         return render_template('/Travelbuddycustomer/index.html', recommendations = recommendations)
 
@@ -81,71 +84,134 @@ def clogin():
         cursor.execute('''SELECT * FROM customer WHERE email=%s and pass=%s; ''',[username,password])
         customer_exists=cursor.fetchone()
         cursor.execute('''SELECT * FROM `recommendations` WHERE rec_id LIMIT 3;''')
-        existing_user1=cursor.fetchall()
+        recommendations=cursor.fetchall()
+        cursor.execute('''SELECT `depart_airport` FROM `flights`;''')
+        depart_details=cursor.fetchall()
         if not customer_exists:
             return render_template("error.html",error="Incorrect Email Or Password")
         session['logged_in'] = True
-        session['cust_data'] = customer_exists
-        session['cust_data'] = existing_user1
+        session['customer_exists'] = customer_exists
+        session['recommendations'] = recommendations
+        session['depart_details'] = depart_details
 
-        return render_template('/Travelbuddycustomer/index.html', users=customer_exists, recommendations=existing_user1)
+        return render_template('/Travelbuddycustomer/index.html', users=customer_exists, recommendations=recommendations,depart_details=depart_details)
         # return redirect(url_for('home'))
     return render_template('/Travelbuddycustomer/login.html')
 
 @app.route('/login')
 def login():
-    return render_template('/Travelbuddycustomer/login.html')
-
-@app.route('/hotel')
-def hotel():
-    return render_template('/Travelbuddycustomer/hotelbook.html')
-
-@app.route('/car')
-def car():
-    return render_template('/Travelbuddycustomer/car_rental.html')
-
-@app.route('/payment')
-def payment():
-    return render_template('/Travelbuddycustomer/payment.html')
-
-
-
-@app.route('/emergency')
-def emergency():
-    return render_template('/Travelbuddycustomer/emergency.html')
-
-@app.route('/docstore')
-def docstore():
-    return render_template('/Travelbuddycustomer/docstore.html')
-
-@app.route('/packbook')
-def packbook():
-    return render_template('/Travelbuddycustomer/package_booking.html')
-
+    customer_exists = session.get('customer_exists')
+    recommendations = session.get('recommendations')
+    depart_details = session.get('depart_details')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/index.html',user=customer_exists, recommendations = recommendations,depart_details=depart_details)
+    else:
+        return render_template('/Travelbuddycustomer/login.html')
 
 @app.route('/about')
 def about():
-    return render_template('/Travelbuddycustomer/about.html')
-
-@app.route('/userprofile')
-def userprofile():
-    return render_template('/Travelbuddycustomer/userprofile.html')
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/about.html',user=customer_exists)
+    else:
+        return render_template('/Travelbuddycustomer/about.html')
 
 @app.route('/service')
 def service():
-    return render_template('/Travelbuddycustomer/service.html')
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/service.html',user=customer_exists)
+    else:
+        return render_template('/Travelbuddycustomer/service.html')
 
 @app.route('/contact')
 def contact():
-    return render_template('/Travelbuddycustomer/contact.html')
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/contact.html',user=customer_exists)
+    else:
+        return render_template('/Travelbuddycustomer/contact.html')
+
+
+@app.route('/hotelbook')
+def hotelbook():
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/hotelbook.html')
+    else:
+        return render_template('/Travelbuddycustomer/login.html')
+
 
 @app.route('/itinerary')
 def itinerary():
-    return render_template('/Travelbuddycustomer/booking.html')
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/booking.html',user=customer_exists)
+    else:
+        return render_template('/Travelbuddycustomer/login.html')
 
 @app.route('/register')
 def register():
-    return render_template('/Travelbuddycustomer/signup.html')
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        recommendations = session.get('recommendations')
+        return render_template('/Travelbuddycustomer/index.html',user=customer_exists, recommendations = recommendations)
+    else:
+        return render_template('/Travelbuddycustomer/signup.html')
+
+#IDWAL EDITED THIS 
+@app.route('/emergency')
+def emergency():
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/emergency.html')
+    else:
+        return render_template('/Travelbuddycustomer/login.html')
+
+@app.route('/docstore')
+def docstore():
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/docstore.html')
+    else:
+        return render_template('/Travelbuddycustomer/login.html')
+
+@app.route('/packbook')
+def packbook():
+    customer_exists = session.get('customer_exists')
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * FROM `recommendations`''')
+    recommendations=cursor.fetchall()
+    return render_template('/Travelbuddycustomer/package_booking.html',user=customer_exists,recommendations=recommendations) 
+
+@app.route('/display')
+def display():
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/display_itenary.html',user=customer_exists)
+    else:
+        return render_template('/Travelbuddycustomer/login.html')
+    
+@app.route('/payment')
+def payment():
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/payment.html')
+    else:
+        return render_template('/Travelbuddycustomer/login.html')
+
+@app.route('/car')
+def car():
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        return render_template('/Travelbuddycustomer/car_rental.html')
+    else:
+        return render_template('/Travelbuddycustomer/login.html')
+
+# @app.route('/contact')
+# def contact():
+#     return render_template('/Travelbuddycustomer/contact.html')
+#TILL ABOVE IDWAL EDITED
 
 @app.route('/confirming', methods=['POST'])
 def confirming():
@@ -170,19 +236,299 @@ def confirming():
 
 @app.route('/package')
 def package():
-    cursor = mysql.connection.cursor()
-    cursor.execute('''SELECT * FROM `recommendations` WHERE rec_id;''')
-    recommendations = cursor.fetchall()
-    return render_template('/Travelbuddycustomer/package.html', recommendations = recommendations)
-
-@app.route('/display')
-def display():
-    return render_template('/Travelbuddycustomer/display_itenary.html')
+    customer_exists = session.get('customer_exists')
+    if customer_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `recommendations` WHERE rec_id;''')
+        recommendations = cursor.fetchall()
+        return render_template('/Travelbuddycustomer/package.html',user=customer_exists, recommendations = recommendations)
+    else:
+        return render_template('/Travelbuddycustomer/package.html', recommendations = recommendations)
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
+
+
+@app.route('/admin')
+def admin():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `customer`;''')
+        customer_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/admin_index.html',users = admin_exists)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/ad_login', methods=['GET','POST'])
+def ad_login():
+    username= request.form.get("email")
+    password= request.form.get("pass")
+    print(password)
+    print(username)
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * FROM admin WHERE email=%s and pass=%s; ''',[username,password])
+    admin_exists=cursor.fetchone()
+    # cursor.execute('''SELECT * FROM `recommendations` WHERE rec_id LIMIT 3;''')
+    # existing_user1=cursor.fetchall()
+    if not admin_exists:
+        return render_template("error.html",error="Incorrect Email Or Password")
+    session['logged_in'] = True
+    session['admin_data'] = admin_exists
+    # session['cust_data'] = existing_user1
+
+    return render_template('/Travelbuddyadmin/template/admin_index.html',users = admin_exists )
+
+@app.route('/admin_index')
+def admin_index():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `customer`;''')
+        customer_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/admin_index.html',users = admin_exists)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/customer_details')
+def customer_details():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `customer`;''')
+        customer_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/customer_details.html',users = admin_exists, customer_details = customer_details )
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/bookings')
+def bookings():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `booking` INNER JOIN itinerary ON itinerary.itinerary_id = booking.itinerary_id INNER JOIN token ON token.token_id = itinerary.token_id INNER JOIN customer ON customer.cust_id = token.cust_id;''')
+        booking_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/bookings.html',users = admin_exists, bookings = booking_details)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/vendor_details')
+def vendor_details():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `vendor`;''')
+        vendor_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/vendor_details.html',users = admin_exists, vendor = vendor_details)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/flight')
+def flight():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `flights`;''')
+        flight_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/pricing/flights.html', users = admin_exists, flight = flight_details)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/train')
+def train():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `trains`;''')
+        train_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/pricing/trains.html',users = admin_exists, train = train_details)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/bus')
+def bus():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `bus`;''')
+        bus_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/pricing/bus.html',users = admin_exists, bus = bus_details)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/rental_vehicle')
+def rental_vehicle():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `vehicle_rental`;''')
+        rental_vehicle=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/pricing/rentalvehicle.html',users = admin_exists, rental_vehicle=rental_vehicle)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/hotel')
+def hotel():
+    admin_exists = session.get('admin_data')
+    if admin_exists:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT * FROM `hotels`;''')
+        hotel_details=cursor.fetchall()
+        return render_template('/Travelbuddyadmin/template/pricing/hotels.html',users = admin_exists, hotel = hotel_details)
+    else:
+        return render_template('/Travelbuddyadmin/template/samples/login.html')
+
+@app.route('/vendor')
+def vendor():
+    vendor_exists = session.get('vendor_data')
+    if vendor_exists:
+        details = session.get('details')
+        count_details = session.get('count_details')
+        customer_details = session.get('customer_details')
+        return render_template('/Travelbuddyvendor/template/dashboard/busdashboard.html',users = vendor_exists , details = details, count_details = count_details, customer_details=customer_details)
+    else:
+        return render_template('/Travelbuddyvendor/template/login/login.html')
+    
+
+@app.route('/vd_login', methods=['GET','POST'])
+def vd_login():
+    username= request.form.get("email")
+    password= request.form.get("pass")
+    print(password)
+    print(username)
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * FROM vendor WHERE email=%s and pass=%s; ''',[username,password])
+    vendor_exists=cursor.fetchone()
+    if not vendor_exists:
+        return render_template("error.html",error="Incorrect Email Or Password")
+    vendor_type = vendor_exists[3]
+    vendor_business = vendor_exists[6]
+    vendor_id = vendor_exists[0]
+    print("vendor name")
+    print(vendor_type)
+    if vendor_type == 'bus':
+        print("going inside bus")
+        cursor.execute('''SELECT * FROM `booked_bus` INNER JOIN bus ON bus.bus_id = booked_bus.bus_id WHERE bus.bus_name = %s;''',(vendor_business,))
+        details=cursor.fetchall()
+        cursor.execute('''SELECT COUNT(booked_bus.booked_bus_id) FROM `booked_bus` INNER JOIN bus ON bus.bus_id = booked_bus.bus_id WHERE bus.bus_name = %s;''',(vendor_business,))
+        count_details=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `bus` WHERE bus_name = %s AND vendor_id = %s;''',(vendor_business,vendor_id,))
+        management=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `booked_bus` INNER JOIN bus ON bus.bus_id = booked_bus.booked_bus_id INNER JOIN vendor ON vendor.vendor_id = bus.vendor_id WHERE vendor.vendor_id = %s AND bus.bus_name = %s;''',(vendor_id,vendor_business,))
+        booking=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `booked_bus` INNER JOIN customer ON customer.cust_id = booked_bus.cust_id INNER JOIN bus ON bus.bus_id = booked_bus.bus_id WHERE bus.bus_name = %s;''',(vendor_business,))
+        customer_details=cursor.fetchall()
+    elif vendor_type == 'flight':
+        cursor.execute('''SELECT * FROM booked_flights INNER JOIN flights ON flights.flight_id = booked_flights.flight_id WHERE flights.flight_name = %s;''',(vendor_business,))
+        details=cursor.fetchall()
+        cursor.execute('''SELECT COUNT(booked_flights.booked_flight_id) FROM booked_flights INNER JOIN flights ON flights.flight_id = booked_flights.flight_id WHERE flights.flight_name = %s;''',(vendor_business,))
+        count_details=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `flights` WHERE flight_name = %s AND vendor_id = %s;''',(vendor_business,vendor_id,))
+        management=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `booked_flights` INNER JOIN flights ON flights.flight_id = booked_flights.flight_id INNER JOIN vendor ON vendor.vendor_id = flights.vendor_id WHERE vendor.vendor_id = %s AND flights.flight_name = %s;''',(vendor_id,vendor_business,))
+        booking=cursor.fetchall()
+        cursor.execute('''SELECT * FROM booked_flights INNER JOIN customer ON customer.cust_id = booked_flights.cust_id INNER JOIN flights ON flights.flight_id = booked_flights.flight_id WHERE flights.flight_name = %s;''',(vendor_business,))
+        customer_details=cursor.fetchall()
+    elif vendor_type == 'train':
+        cursor.execute('''SELECT * FROM `booked_train` INNER JOIN trains ON trains.train_id = booked_train.train_id WHERE booked_train.train_name = %s;''',(vendor_business,))
+        details=cursor.fetchall()
+        cursor.execute('''SELECT COUNT(booked_train.booked_train_id) FROM `booked_train` INNER JOIN trains ON trains.train_id = booked_train.train_id WHERE trains.train_name = %s;''',(vendor_business,))
+        count_details=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `trains` WHERE train_name = %s AND vendor_id = %s;''',(vendor_business,vendor_id,))
+        management=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `booked_train` INNER JOIN trains ON trains.train_id = booked_train.train_id INNER JOIN vendor ON vendor.vendor_id = trains.vendor_id WHERE vendor.vendor_id = %s AND trains.train_name = %s;''',(vendor_id,vendor_business,))
+        booking=cursor.fetchall()
+        cursor.execute('''SELECT * FROM booked_train INNER JOIN customer ON customer.cust_id = booked_train.cust_id INNER JOIN trains ON trains.train_id = booked_train.train_id WHERE booked_train.train_name = %s;''',(vendor_business,))
+        customer_details=cursor.fetchall()
+    elif vendor_type == 'rental':
+        cursor.execute('''SELECT * FROM `booked_vehicle_rentals` INNER JOIN vehicle_rental ON vehicle_rental.vehicle_rental_id = booked_vehicle_rentals.vehicle_rental_id WHERE vehicle_rental.vehicle_rental_name = %s;''',(vendor_business,))
+        details=cursor.fetchall()
+        cursor.execute('''SELECT COUNT(booked_vehicle_rentals.booked_vehicle_id) FROM `booked_vehicle_rentals` INNER JOIN vehicle_rental ON vehicle_rental.vehicle_rental_id = booked_vehicle_rentals.vehicle_rental_id WHERE vehicle_rental.vehicle_rental_name = %s;''',(vendor_business,))
+        count_details=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `vehicle_rental` WHERE vehicle_rental_name = %s AND vendor_id = %s;''',(vendor_business,vendor_id,))
+        management=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `booked_vehicle_rentals` INNER JOIN vehicle_rental ON vehicle_rental.vehicle_rental_id = booked_vehicle_rentals.vehicle_rental_id INNER JOIN vendor ON vendor.vendor_id = vehicle_rental.vendor_id WHERE vendor.vendor_id = %s AND vehicle_rental.vehicle_rental_name = %s;''',(vendor_id,vendor_business,))
+        booking=cursor.fetchall()
+        cursor.execute('''SELECT * FROM booked_vehicle_rentals INNER JOIN customer ON customer.cust_id = booked_vehicle_rentals.cust_id INNER JOIN vehicle_rental ON vehicle_rental.vehicle_rental_id = booked_vehicle_rentals.vehicle_rental_id WHERE vehicle_rental.vehicle_rental_name = %s;''',(vendor_business,))
+        customer_details=cursor.fetchall()
+    elif vendor_type == 'hotel':
+        cursor.execute('''SELECT * FROM booked_hotel INNER JOIN hotels ON hotels.hotel_id = booked_hotel.hotel_id WHERE hotels.hotels_name = %s;''',(vendor_business,))
+        details=cursor.fetchall()
+        cursor.execute('''SELECT COUNT(booked_hotel.booked_hotel_id) FROM booked_hotel INNER JOIN hotels ON hotels.hotel_id = booked_hotel.hotel_id WHERE hotels.hotels_name = %s;''',(vendor_business,))
+        count_details=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `hotels` WHERE hotels_name = %s AND vendor_id = %s;''',(vendor_business,vendor_id,))
+        management=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `booked_hotel` INNER JOIN hotels ON hotels.hotel_id = booked_hotel.hotel_id INNER JOIN vendor ON vendor.vendor_id = hotels.vendor_id WHERE vendor.vendor_id = %s AND hotels.hotels_name = %s;''',(vendor_id,vendor_business,))
+        booking=cursor.fetchall()
+        cursor.execute('''SELECT * FROM `booked_hotel` INNER JOIN customer ON customer.cust_id = booked_hotel.cust_id INNER JOIN hotels ON hotels.hotel_id = booked_hotel.hotel_id WHERE hotels.hotels_name = %s;''',(vendor_business,))
+        customer_details=cursor.fetchall()
+
+    if not vendor_exists:
+        return render_template("error.html",error="Incorrect Email Or Password")
+    session['logged_in'] = True
+    session['vendor_data'] = vendor_exists
+    session['details'] = details
+    session['count_details'] = count_details
+    session['management'] = management
+    session['booking'] = booking
+    session['customer_details'] = customer_details
+    # session['cust_data'] = existing_user1
+
+    return render_template('/Travelbuddyvendor/template/dashboard/busdashboard.html',users = vendor_exists , details = details, count_details = count_details, management=management,customer_details=customer_details)
+
+    
+@app.route('/busdashboard')
+def busdashboard():
+    vendor_exists = session.get('vendor_data')
+    if vendor_exists:
+        details = session.get('details')
+        count_details = session.get('count_details')
+        customer_details = session.get('customer_details')
+        return render_template('/Travelbuddyvendor/template/dashboard/busdashboard.html',users = vendor_exists , details = details, count_details = count_details, customer_details=customer_details)
+    else:
+        return render_template('/Travelbuddyvendor/template/login/login.html')
+
+@app.route('/busbooking')
+def busbooking():
+    vendor_exists = session.get('vendor_data')
+    if vendor_exists:
+        details = session.get('details')
+        count_details = session.get('count_details')
+        booking = session.get('booking')
+        customer_details = session.get('customer_details')
+        return render_template('/Travelbuddyvendor/template/bookings/busbooking.html', users = vendor_exists, details = details, count_details = count_details, booking=booking,customer_details=customer_details)
+    else:
+        return render_template('/Travelbuddyvendor/template/login/login.html')
+
+@app.route('/customerdetalis')
+def customerdetalis():
+    vendor_exists = session.get('vendor_data')
+    if vendor_exists:
+        customer_details = session.get('customer_details')
+        return render_template('/Travelbuddyvendor/template/customerdetalis.html', users = vendor_exists,customer_details=customer_details)
+    else:
+        return render_template('/Travelbuddyvendor/template/login/login.html')
+    
+@app.route('/busmanagement')
+def busmanagement():
+    vendor_exists = session.get('vendor_data')
+    if vendor_exists:
+        management = session.get('management')
+        return render_template('/Travelbuddyvendor/template/management/busmanagement.html', users = vendor_exists, management= management)
+    else:
+        return render_template('/Travelbuddyvendor/template/login/login.html')
+
+@app.route('/buspricing')
+def buspricing():
+    vendor_exists = session.get('vendor_data')
+    if vendor_exists:
+        return render_template('/Travelbuddyvendor/template/pricing/buspricing.html', users = vendor_exists)
+
+@app.route('/busschedule')
+def busschedule():
+    return render_template('/Travelbuddyvendor/template/schedules/busschedule.html')
 
 # @app.route('/itinerarycreate')
 # def itinerarycreate():
@@ -555,13 +901,23 @@ def submit():
     print(percentage)
     transportation = transportation_avaliable(org, dest,percentage,cal_budget,int(nots))
     print(transportation)
+    print(transportation[1][10])
+    transportation_cost_per_person = transportation[1][10]
+    transportation_cost = transportation_cost_per_person*int(nots)
+
     # FOR NOW LOCATION ID = 10
     loc_id = 10
     hotel = hotel_available(loc_id,int(percentage),days)
     print(hotel)
-    print("hehehehe",hotel[1][5])
+    print("hehehehe",hotel[1][6])
+    hotel_price_per_day = hotel[1][6]
+    hotel_cost = days*hotel_price_per_day
+    print('hotel cost days: ',hotel_cost)
+
     # cal_budget = cal_budget-(int(transportation[0]) + int(hotel[0])) #THIS LINE WILL WORK LATER.. SINCE IDK THE RIGHT ARRAY INDEX FOR PRICE
     print(cal_budget)
+
+    total_cost = "{:.2f}".format(hotel_cost + transportation_cost)
 
     act = get_user_data(age_range,travel_type,trip_type,days,budget)
     print(act)
@@ -578,7 +934,7 @@ def submit():
     # activities = ["Sightseeing","BeachActivities", "Nightlife", "Shopping"]
     arrive = transportation[1][6]
     print(arrive)
-    location = int(hotel[1][6])
+    location = int(hotel[1][7])
     print("location")
     print(location)
     creating_days = creating_data(activities,days,trip_type,location,arrive)
@@ -612,7 +968,11 @@ def submit():
     # -------------------------------------------------------------------------------------------------------------------------------------
 
     if creating_days:
-        cust_id='1' #CHANGE THIS BY CUST ID SESSION ----------------------------------------------------------------- 
+        customer_exists = session.get('customer_exists')
+        if not customer_exists:
+            return render_template('/Travelbuddycustomer/login.html')
+        cust_id=str(customer_exists[0]) #CHANGE THIS BY CUST ID SESSION -----------------------------------------------------------------
+        print('customer iddddddddd ',cust_id) 
         cursor = mysql.connection.cursor()
         cursor.execute('''INSERT INTO `token` (`token_id`, `cust_id`) VALUES (NULL, %s);''',(cust_id))
         cursor.execute('''SELECT * FROM `token` ORDER BY token_id DESC LIMIT 1;''')
@@ -651,11 +1011,14 @@ def submit():
             else:
                 for activity in item:
                     print(activity)
-                    cursor.execute("INSERT INTO itinerary (itinerary_id, days, itinerary, itinerary_loc, description, taluka, token_id) VALUES (NULL,  %s, %s, %s, %s, %s, %s)", (current_day, activity[0], activity[1], activity[2], activity[3], token))
+                    cursor.execute("INSERT INTO itinerary (itinerary_id, days, itinerary, itinerary_loc, description, taluka, token_id,image) VALUES (NULL,  %s, %s, %s, %s, %s, %s, %s)", (current_day, activity[0], activity[1], activity[2], activity[3], token, activity[4]))
                     print("zale re zale")
+
+        # cursor.execute("INSERT INTO itinerary (itinerary_id, days, itinerary, itinerary_loc, description, taluka, token_id) VALUES (NULL,  %s, %s, %s, %s, %s, %s)", (current_day, activity[0], activity[1], activity[2], activity[3], token))
         mysql.connection.commit()
 
 
+    return render_template('/Travelbuddycustomer/display_itenary.html', org=org, dest=dest,start=start,end=end, budget=budget,days=days,transportation=transportation, hotel=hotel, creating_days=creating_days,total_cost=total_cost) ## --TO PRINT DATA BACK TO HTML
     return render_template('generated.html', org=org, dest=dest,start=start,end=end, budget=budget,days=days,transportation=transportation, hotel=hotel, creating_days=creating_days) ## --TO PRINT DATA BACK TO HTML
     # return f"Submitted Data: Org - {org}\n, dest - {dest}\n days = {days} {percentage} {transportation} {hotel} {budget} {car}\n"
 

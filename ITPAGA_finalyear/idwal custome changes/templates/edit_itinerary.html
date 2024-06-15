@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Itinerary | Travel Buddy</title>
+</head>
+<body>
+    <p>itinerary edit korpa ti page he </p>
+        {% for activity in itinerary: %}
+            <p> Name: {{ activity[2] }} </p>
+            <p> Location: {{ activity[3] }} </p>
+            <p> Description: {{ activity[4] }} </p>
+            <p> Taluka: {{ activity[5] }} </p>
+    {% for extractions in extraction%}
+    <!-- image print korpa re but ata image na ni so word print korta -->
+    <a href="" class="dispimage"> {{ extractions[1] }} </a> <br>
+    {% endfor %}
+        {% endfor %}
+
+</body>
+</html>

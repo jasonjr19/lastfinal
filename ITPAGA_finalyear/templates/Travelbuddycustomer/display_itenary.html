@@ -63,7 +63,17 @@
                    <a href="{{ url_for('itinerary') }}" class="nav-item nav-link active">Itinerary</a>
                    <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
                </div>
-               <a href="" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+               {% if session['logged_in'] != True %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {% elif session['logged_in'] == True and user %}
+                <div class="navbar-profile">
+                    <img class="img-xs rounded-circle w-50 h-50" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="Profile Picture">
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </div>
+                {% endif %}
            </div>
        </nav>
 
@@ -94,50 +104,59 @@
                <div class="col-md-6">
                    <div class="card bg-light shadow-sm">
                        <div class="card-body">
-                           <h3 class="card-title text-primary mb-4">Day 1
+                    {% for creating_day in creating_days %}
+                    {% if creating_day is string %}
+                           <h3 class="card-title text-primary mb-4">{{ creating_day }}
                                <button class="btn btn-sm btn-outline-primary float-end" data-bs-toggle="modal" data-bs-target="#editDay1Modal">Edit</button>
                            </h3>
+                           {% else: %}
+                           {% for activity in creating_day: %}
                            <div class="activity mb-3">
-                               <img class="img-fluid w-25 me-3 mb-3 mb-md-0" src="{{ url_for('static', filename='customer_assets/img/package-1.jpg') }}" alt="">
+                               <img class="img-fluid w-25 me-3 mb-3 mb-md-0"  src="{{ url_for('static', filename=activity[4]) }}" alt="">
                                <div>
-                                   <h5 class="activity-title">Activity 1</h5>
-                                   <p class="activity-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, commodi?</p>
+                                   <h5 class="activity-title">{{ activity[0] }}</h5>
+                                   <p class="activity-description">{{ activity[2] }}</p>
                                </div>
                            </div>
-                           <div class="activity mb-3">
+                           {% endfor %}
+                           {% endif %}
+                           {% endfor %}
+                           <h1>Total Living and Travel Expenses: &#8377; {{ total_cost }}</h1>
+                           <p>The above prices.. </p>
+                           <!-- <div class="activity mb-3">
                                <img class="img-fluid w-25 me-3 mb-3 mb-md-0" src="{{ url_for('static', filename='customer_assets/img/package-2.jpg') }}" alt="">
                                <div>
                                    <h5 class="activity-title">Activity 2</h5>
                                    <p class="activity-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, commodi?</p>
                                </div>
-                           </div>
+                           </div> -->
                        </div>
                    </div>
                </div>
                
                <!-- Day 2 -->
-               <div class="col-md-6">
+               <!-- <div class="col-md-6">
                    <div class="card bg-light shadow-sm">
                        <div class="card-body">
                            <h3 class="card-title text-primary mb-4">Day 2
                                <button class="btn btn-sm btn-outline-primary float-end" data-bs-toggle="modal" data-bs-target="#editDay2Modal">Edit</button>
-                           </h3>
+                           </h3> -->
                            <!-- Add activities for Day 2 here -->
-                       </div>
+                       <!-- </div>
                    </div>
-               </div>
+               </div> -->
                
                <!-- Day 3 -->
-               <div class="col-md-6">
+               <!-- <div class="col-md-6">
                    <div class="card bg-light shadow-sm">
                        <div class="card-body">
                            <h3 class="card-title text-primary mb-4">Day 3
                                <button class="btn btn-sm btn-outline-primary float-end" data-bs-toggle="modal" data-bs-target="#editDay3Modal">Edit</button>
-                           </h3>
+                           </h3> -->
                            <!-- Add activities for Day 3 here -->
-                       </div>
+                       <!-- </div>
                    </div>
-               </div>
+               </div> -->
                
                <!-- Add more days as needed -->
                
@@ -246,10 +265,11 @@
                </div>
                <div class="modal-body">
                    <p>Are you sure you want to confirm this itinerary?</p>
+                   <p>&#8377; {{ total_cost }}</p>
                </div>
                <div class="modal-footer">
                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                   <button type="button" class="btn btn-primary">Confirm</button>
+                   <a type="button" class="btn btn-primary" href="{{ url_for('payment') }}">Confirm</a>
                </div>
            </div>
        </div>

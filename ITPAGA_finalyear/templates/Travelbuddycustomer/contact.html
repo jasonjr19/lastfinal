@@ -97,7 +97,17 @@
                     </div> -->
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link active">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {% if session['logged_in'] != True %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {% elif session['logged_in'] == True and user %}
+                <div class="navbar-profile">
+                    <img class="img-xs rounded-circle w-50 h-50" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="Profile Picture">
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </nav>
 

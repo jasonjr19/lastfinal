@@ -99,21 +99,19 @@
                     </div> -->
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
                 </div>
-                {% if session['logged_in'] != True %}
-                <a href="{{ url_for('register') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
-                {% elif session['logged_in'] == True and users %}
-                <div class="profile-info">
-                    <img src="{{ url_for('static', filename='images/g1new.jpg') }}" alt="Profile Picture">
+                {% if user %}
+                <div class="navbar-profile">
+                    <img class="img-xs rounded-circle w-50 h-50" src="{{ url_for('static', filename='admin_assets/images/faces/face15.jpg') }}" alt="Profile Picture">
                     <div class="dropdown-content">
-                        <a href="">Profile</a>
-                        <!-- <p style="color: black;">{{ users[1] }}</p> -->
+                        <a href="#">Profile</a>
                         <a href="{{ url_for('logout') }}">Logout</a>
                     </div>
                 </div>
+                {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
                 {% endif %}
             </div>
         </nav>
-
         <div class="container-fluid bg-primary py-5 mb-5 hero-header">
             <video autoplay loop muted playsinline>
                 <source src="{{ url_for('static', filename='customer_assets/img/Goa_1.mp4') }}" type="video/mp4">
@@ -130,7 +128,7 @@
                             <button type="button" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
                         </div> -->
                     </div>
-                    <a href="booking.html" class="btn btn-primary rounded-pill py-2 px-4 position-relative mt-5 w-25" style="top: -50px;">Create your Itinerary</a>
+                    <a href="{{ url_for('itinerary') }}" class="btn btn-primary rounded-pill py-2 px-4 position-relative mt-5 w-25" style="top: -50px;">Create your Itinerary</a>
                      </div> 
                     </div>
                 </div>
@@ -191,7 +189,7 @@
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <a href="{{ url_for('hotel') }}" style="color: inherit; text-decoration: none;">
+                    <a href="{{ url_for('hotelbook') }}" style="color: inherit; text-decoration: none;">
                         <div class="service-item rounded pt-3">
                             <div class="p-4">
                                 <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
@@ -427,12 +425,11 @@
                             Create your itinerary for an unforgettable journey filled with adventure and discovery. Explore breathtaking landscapes, immerse yourself in local culture, and indulge in delicious cuisine along the way.
                         </p>
                         <p class="mb-4">Enriching travel experience, brimming with exploration and relaxation. Immerse yourself in diverse landscapes, savor local delights, and create lasting memories.</p>
-                        
-                        <a class="btn btn-outline-light py-3 px-5 mt-2" href="{{ url_for('display') }}">submit</a>
+                        <!-- <a class="btn btn-outline-light py-3 px-5 mt-2" href="{{ url_for('display') }}">Submit</a> -->
                     </div>
                     <div class="col-md-6">
                         <h1 class="text-white mb-4">Book A Tour</h1>
-                        <form>
+                        <form action="/submit" method="post">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
@@ -450,9 +447,9 @@
                                     <div class="form-floating">
                                         <select class="form-select bg-transparent" id="trip_type" name="trip_type" required>
                                             <option value="" disabled selected>Select</option>
-                                            <option value="Chill (1-2 activities)">Chill (1-2 activities)</option>
-                                            <option value="Touristy (2-3 activities)">Touristy (2-3 activities)</option>
-                                            <option value="Packed (3 or more activities)">Packed (3 or more activities)</option>
+                                            <option value="Chill ( 1-2 activities)">Chill (1-2 activities)</option>
+                                            <option value="Touristy ( 2-3 activities)">Touristy (2-3 activities)</option>
+                                            <option value="Packed ( 3 or more activities)">Packed (3 or more activities)</option>
                                         </select>
                                         <label for="trip_type">Trip Type</label>
                                     </div>
@@ -472,11 +469,15 @@
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <select class="form-select bg-transparent" id="source" name="source" required>
+                                           
                                             <option value="" disabled selected>Select Source</option>
-                                            <option value="City A">City A</option>
-                                            <option value="City B">City B</option>
-                                            <option value="City C">City C</option>
+                                            {% for depart_detail in depart_details %}
+                                            <option value="{{ depart_detail }}">{{ depart_detail }}</option>
+                                            {% endfor %}
+                                            <!-- <option value="City B">City B</option>
+                                            <option value="City C">City C</option> -->
                                             <!-- Add more cities as needed -->
+                                            
                                         </select>
                                         <label for="source">Source</label>
                                     </div>
@@ -485,9 +486,7 @@
                                     <div class="form-floating">
                                         <select class="form-select bg-transparent" id="destination" name="destination" required>
                                             <option value="" disabled selected>Select Destination</option>
-                                            <option value="City X">City X</option>
-                                            <option value="City Y">City Y</option>
-                                            <option value="City Z">City Z</option>
+                                            <option value="Goa">Goa</option>
                                             <!-- Add more cities as needed -->
                                         </select>
                                         <label for="destination">Destination</label>
@@ -495,7 +494,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control bg-transparent" id="adults" name="adults" required min="1">
+                                        <input type="number" class="form-control bg-transparent" id="numTravelers" name="numTravelers" required min="1">
                                         <label for="adults">Number of Adults</label>
                                     </div>
                                 </div>
@@ -524,18 +523,20 @@
                                     <div class="form-floating">
                                         <select class="form-select bg-transparent" id="budget" name="budget" required>
                                             <option value="" disabled selected>Select Budget</option>
-                                            <option value="10000">Less than 10000</option>
-                                            <option value="20000">10000 - 20000</option>
-                                            <option value="40000">20000 - 40000</option>
-                                            <option value="60000">40000 - 60000</option>
-                                            <option value="80000">60000 - 80000</option>
-                                            <option value="100000">80000 - 100000</option>
-                                            <option value="100000000">More than ₹100,000</option>
+                                            <option value="Less than 10000">Less than 10000</option>
+                                            <option value="10000 - 20000">10000 - 20000</option>
+                                            <option value="20000 - 40000">20000 - 40000</option>
+                                            <option value="40000 - 60000">40000 - 60000</option>
+                                            <option value="60000 - 80000">60000 - 80000</option>
+                                            <option value="80000 - 100000">80000 - 100000</option>
+                                            <option value="More than ₹100,000">More than ₹100,000</option>
                                         </select>
                                         <label for="budget">Budget (in Rs)</label>
                                     </div>
                                 </div>
                             </div>
+                            <button class="btn btn-outline-light py-3 px-5 mt-2" type="submit" value="submit">Submit</button>
+                            <!-- <a class="btn btn-outline-light py-3 px-5 mt-2" href="{{ url_for('display') }}">Submit</a> -->
                         </form>
                         <script>
                             // Get the current date
@@ -805,25 +806,23 @@ ccc                            .
     <!-- Footer End -->
 
 
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
-
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ url_for('static', filename='customer_assets/lib/wow/wow.min.js') }}"></script>
-<script src="{{ url_for('static', filename='customer_assets/lib/easing/easing.min.js') }}"></script>
-<script src="{{ url_for('static', filename='customer_assets/lib/waypoints/waypoints.min.js') }}"></script>
-<script src="{{ url_for('static', filename='customer_assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-<script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/moment.min.js') }}"></script>
-<script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
-<script src="{{ url_for('static', filename='customer_assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-
-<!-- Template Javascript  -->
-<script src="{{ url_for('static', filename='customer_assets/js/main.js') }}"></script>
+    <!-- Template Javascript  -->
+    <script src="{{ url_for('static', filename='customer_assets/js/main.js') }}"></script>
 </body>
 
 </html>
